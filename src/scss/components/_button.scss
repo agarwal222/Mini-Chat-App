@@ -1,0 +1,15 @@
+@use '../base/colors' as col;
+@use '../base/font-size' as fs;
+
+button{
+    font-size: fs.$base_font;
+    font-weight: 400;
+    background-color: col.$comp_bg;
+    padding: 0.3em 1.5em;
+    margin: 1em 0;
+    color: col.$text_col;
+    border: 1px solid col.$text_col;
+    border-radius: 10px;
+    cursor: pointer;
+    float: right;
+}

@@ -1,0 +1,85 @@
+@use "root";
+@use 'base/colors' as col;
+@use "base/font-size" as fs;
+@use "components/button";
+@use "components/input";
+
+body{
+    background-color: col.$prime_bg;
+}
+
+.main_contaner{
+    display: flex;
+    flex-direction: row;
+    margin: 0 auto;
+    width: calc(100vw - 200px);
+    min-width: 600px;
+    max-width: 1500px;
+    height: 100vh;
+}
+
+.contaner_center{
+    display: grid;
+    grid-template-columns: 60% 40%;
+    grid-gap: 1.5em;
+    align-self: center;
+    height: calc(100vh - 140px);
+    min-height: 500px;
+    max-height: 800px;
+    width: 49.3em;
+    min-width: 500px;
+    max-height: 700px;
+    margin: 0 auto;
+}
+
+.center_left{
+    background-color: col.$second_bg;
+    display: grid;
+    grid-template-rows: 30% 70%;
+    align-items: stretch;
+    justify-content: center;
+    color: col.$text_col;
+    justify-content: stretch;
+    justify-items: center;
+    box-shadow: 0px 0px 15px 5px rgba(22, 22, 37, 0.45);
+
+    h1{
+        font-size: fs.$head_font;
+        place-self: center;
+    }
+
+    .form_contaner{
+        width: calc(100% - 100px);
+        margin: 0 auto;
+
+        label{
+            font-size: fs.$base_font;
+            font-weight: 500;
+        }
+
+        input{
+            margin: 1em 0 2em 0;
+        }
+    }
+}
+
+.center_right{
+    background-color: col.$second_bg;
+    display: grid;
+    grid-template-rows: 30% 70%;
+    color: col.$text_col;
+    justify-content: stretch;
+    justify-items: center;
+    box-shadow: col.$second_bg;
+    box-shadow: 0px 0px 15px 5px rgba(22, 22, 37, 0.45);
+
+    h1{
+        font-size: fs.$head_font;
+        align-self: center;
+    }
+
+    p{
+        margin: 0 2em;
+        word-spacing: 5px;
+    }
+}

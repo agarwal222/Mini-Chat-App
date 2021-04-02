@@ -1,0 +1,11 @@
+@use '../base/colors' as col;
+@use '../base/font-size' as fs;
+
+input{
+    background-color: col.$comp_bg;
+    width: calc(100% - 2em);
+    padding: 1.8em 1em;
+    color: col.$text_col;
+    border: 1px solid col.$text_col;
+    border-radius: 10px;
+}
