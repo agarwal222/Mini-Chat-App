@@ -2,4 +2,5 @@
 This is a mini chat app for learning socket io and other realime technology 
 
 # Instalation
-```run - npm -install```
+Run : 
+```npm -install```
