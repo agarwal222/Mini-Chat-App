@@ -3,6 +3,8 @@
 @use "base/font-size" as fs;
 @use "components/button";
 @use "components/input";
+@use "Layouts/login.scss";
+@use "Layouts/create_or_koin";
 
 body{
     background-color: col.$prime_bg;
@@ -35,32 +37,9 @@ body{
 .center_left{
     background-color: col.$second_bg;
     display: grid;
-    grid-template-rows: 30% 70%;
-    align-items: stretch;
-    justify-content: center;
     color: col.$text_col;
-    justify-content: stretch;
-    justify-items: center;
     box-shadow: 0px 0px 15px 5px rgba(22, 22, 37, 0.45);
 
-    h1{
-        font-size: fs.$head_font;
-        place-self: center;
-    }
-
-    .form_contaner{
-        width: calc(100% - 100px);
-        margin: 0 auto;
-
-        label{
-            font-size: fs.$base_font;
-            font-weight: 500;
-        }
-
-        input{
-            margin: 1em 0 2em 0;
-        }
-    }
 }
 
 .center_right{

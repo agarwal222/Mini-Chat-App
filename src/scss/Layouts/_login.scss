@@ -1,0 +1,36 @@
+@use 'base/colors' as col;
+@use "base/font-size" as fs;
+@use "components/button";
+@use "components/input";
+
+.login_pannel{
+    background-color: col.$second_bg;
+    display: grid;
+    grid-template-rows: 30% 70%;
+    align-items: stretch;
+    justify-content: stretch;
+    justify-items: center;
+
+    h1{
+        font-size: fs.$head_font;
+        place-self: center;
+    }
+
+    .form_contaner{
+        width: calc(100% - 100px);
+        margin: 0 auto;
+
+        .login_btn{
+            float: right;
+        }
+
+        label{
+            font-size: fs.$base_font;
+            font-weight: 500;
+        }
+
+        input{
+            margin: 1em 0 2em 0;
+        }
+    }
+}
