@@ -5,12 +5,17 @@
   "main": "App.js",
   "scripts": {
     "dev": "parcel src/index.html",
-    "build": "parcel build src/index.html"
+    "build": "parcel build src/index.html",
+    "ndmn": "nodemon server/app.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
+    "nodemon": "^2.0.7",
     "parcel-bundler": "^1.12.5",
     "sass": "^1.32.8"
+  },
+  "dependencies": {
+    "express": "^4.17.1"
   }
 }
