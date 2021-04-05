@@ -2668,7 +2668,16 @@ module.exports.default = axios;
 
 },{"./utils":"../node_modules/axios/lib/utils.js","./helpers/bind":"../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../node_modules/axios/lib/helpers/spread.js","./helpers/isAxiosError":"../node_modules/axios/lib/helpers/isAxiosError.js"}],"../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"Js/controler/change_page.js":[function(require,module,exports) {
+},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"Js/views/create_or_join.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.CreatOrJoin = void 0;
+var CreatOrJoin = "\n<div class=\"creat_or_join\">\n    <section class=\"form_contaner\">\n        <button class=\"join_room\" id=\"join_room\">Join a room</button>\n        <div class=\"bysection\"><h2>Or</h2></div>\n        <button class=\"creat_room\" id=\"creat_room\">Creat a room</button>\n    </section>\n</div>\n";
+exports.CreatOrJoin = CreatOrJoin;
+},{}],"Js/controler/change_page.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2676,18 +2685,15 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.change_page = void 0;
 
-var _create_or_join = _interopRequireDefault(require("../../views/create_or_join.html"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-var change_page = function change_page(res, next) {
+var change_page = function change_page(res, next, methon) {
   if (res == 200) {
     document.getElementById("center_left").innerHTML = next;
+    methon();
   }
 };
 
 exports.change_page = change_page;
-},{"../../views/create_or_join.html":"views/create_or_join.html"}],"Js/Global.js":[function(require,module,exports) {
+},{}],"Js/Global.js":[function(require,module,exports) {
 
 "use strict";
 
@@ -2701,7 +2707,51 @@ var global = {
 };
 var _default = global;
 exports.default = _default;
-},{}],"Js/Model/login_check.js":[function(require,module,exports) {
+},{}],"Js/Model/Join_room.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.joinRoom = void 0;
+
+var joinRoom = function joinRoom() {
+  console.log("join room clicked");
+};
+
+exports.joinRoom = joinRoom;
+},{}],"Js/Model/creat_room.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.creatRoom = void 0;
+
+var creatRoom = function creatRoom() {
+  console.log("creat room clicked");
+};
+
+exports.creatRoom = creatRoom;
+},{}],"Js/controler/create_or_join.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.join_room = void 0;
+
+var _Join_room = require("../Model/Join_room");
+
+var _creat_room = require("../Model/creat_room");
+
+var join_room = function join_room() {
+  document.getElementById("join_room").addEventListener("click", _Join_room.joinRoom);
+  document.getElementById("creat_room").addEventListener("click", _creat_room.creatRoom);
+};
+
+exports.join_room = join_room;
+},{"../Model/Join_room":"Js/Model/Join_room.js","../Model/creat_room":"Js/Model/creat_room.js"}],"Js/Model/login_check.js":[function(require,module,exports) {
 
 "use strict";
 
@@ -2712,9 +2762,13 @@ exports.check = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
-var _change_page = _interopRequireDefault(require("../controler/change_page"));
+var _create_or_join = require("../views/create_or_join");
+
+var _change_page = require("../controler/change_page");
 
 var _Global = _interopRequireDefault(require("../Global"));
+
+var _create_or_join2 = require("../controler/create_or_join");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -2746,13 +2800,14 @@ var check = /*#__PURE__*/function () {
 
           case 5:
             promis = _context.sent;
-            (0, _change_page.default)(200, "create_or_join"); // Changing screan if promis resolve in success
+            (0, _change_page.change_page)(promis.status, _create_or_join.CreatOrJoin, _create_or_join2.join_room); // Changing screan if promis resolve in success
             // if(promis.status == 200) {
             //     document.getElementById("center_left").innerHTML = create_or_join;
             // }
-            // return promis.status;
 
-          case 7:
+            return _context.abrupt("return", promis.status);
+
+          case 8:
           case "end":
             return _context.stop();
         }
@@ -2766,12 +2821,15 @@ var check = /*#__PURE__*/function () {
 }();
 
 exports.check = check;
-},{"axios":"../node_modules/axios/index.js","../controler/change_page":"Js/controler/change_page.js","../Global":"Js/Global.js"}],"Js/controler/create_or_join.js":[function(require,module,exports) {
-var join_room = function join_room() {
-  document.getElementById("join_room").addEventListener("click", function () {
-    console.log("clicked");
-  });
-};
+},{"axios":"../node_modules/axios/index.js","../views/create_or_join":"Js/views/create_or_join.js","../controler/change_page":"Js/controler/change_page.js","../Global":"Js/Global.js","../controler/create_or_join":"Js/controler/create_or_join.js"}],"Js/views/loginPage.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LoginPage = void 0;
+var LoginPage = "\n<div class=\"login_pannel\">\n    <h1>Log In</h1>\n    <section class=\"form_contaner\">\n        <label for=\"email\" class=\"email\">E-Mail</label><br />\n        <input type=\"email\" name=\"email\" class=\"email_input\" id=\"email\"><br />\n        <label for=\"display_name\" class=\"display_name\">Display Name</label><br />\n        <input type=\"text\" name=\"display_name\" class=\"siaplay_name_input\" id=\"display_name\"><br />\n        <button type=\"submit\" id=\"btn\" class=\"login_btn\">Next</button>\n    </section>\n</div>\n";
+exports.LoginPage = LoginPage;
 },{}],"Js/App.js":[function(require,module,exports) {
 "use strict";
 
@@ -2779,22 +2837,19 @@ require("regenerator-runtime/runtime");
 
 var _login_check = require("./Model/login_check");
 
-var _loginPage = _interopRequireDefault(require("../views/loginPage.html"));
+var _loginPage = require("./views/loginPage");
 
-var _create_or_join = _interopRequireDefault(require("./controler/create_or_join"));
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
+// import { join_room } from "./controler/create_or_join";
 var login_load = function login_load() {
-  //adding login templat to main window
-  document.getElementById("center_left").innerHTML = _loginPage.default; // Checking for user
+  // adding login templat to main window
+  document.getElementById("center_left").innerHTML = _loginPage.LoginPage; // Checking for user
 
   document.getElementById("btn").addEventListener("click", _login_check.check);
 }; // initialising app
 
 
 document.onload = login_load();
-},{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","./Model/login_check":"Js/Model/login_check.js","../views/loginPage.html":"views/loginPage.html","./controler/create_or_join":"Js/controler/create_or_join.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+},{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","./Model/login_check":"Js/Model/login_check.js","./views/loginPage":"Js/views/loginPage.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2822,7 +2877,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63402" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61858" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
@@ -2998,128 +3053,5 @@ function hmrAcceptRun(bundle, id) {
     return true;
   }
 }
-},{}],"../node_modules/parcel-bundler/src/builtins/bundle-url.js":[function(require,module,exports) {
-var bundleURL = null;
-
-function getBundleURLCached() {
-  if (!bundleURL) {
-    bundleURL = getBundleURL();
-  }
-
-  return bundleURL;
-}
-
-function getBundleURL() {
-  // Attempt to find the URL of the current script and use that as the base URL
-  try {
-    throw new Error();
-  } catch (err) {
-    var matches = ('' + err.stack).match(/(https?|file|ftp|chrome-extension|moz-extension):\/\/[^)\n]+/g);
-
-    if (matches) {
-      return getBaseURL(matches[0]);
-    }
-  }
-
-  return '/';
-}
-
-function getBaseURL(url) {
-  return ('' + url).replace(/^((?:https?|file|ftp|chrome-extension|moz-extension):\/\/.+)?\/[^/]+(?:\?.*)?$/, '$1') + '/';
-}
-
-exports.getBundleURL = getBundleURLCached;
-exports.getBaseURL = getBaseURL;
-},{}],"../node_modules/parcel-bundler/src/builtins/bundle-loader.js":[function(require,module,exports) {
-var getBundleURL = require('./bundle-url').getBundleURL;
-
-function loadBundlesLazy(bundles) {
-  if (!Array.isArray(bundles)) {
-    bundles = [bundles];
-  }
-
-  var id = bundles[bundles.length - 1];
-
-  try {
-    return Promise.resolve(require(id));
-  } catch (err) {
-    if (err.code === 'MODULE_NOT_FOUND') {
-      return new LazyPromise(function (resolve, reject) {
-        loadBundles(bundles.slice(0, -1)).then(function () {
-          return require(id);
-        }).then(resolve, reject);
-      });
-    }
-
-    throw err;
-  }
-}
-
-function loadBundles(bundles) {
-  return Promise.all(bundles.map(loadBundle));
-}
-
-var bundleLoaders = {};
-
-function registerBundleLoader(type, loader) {
-  bundleLoaders[type] = loader;
-}
-
-module.exports = exports = loadBundlesLazy;
-exports.load = loadBundles;
-exports.register = registerBundleLoader;
-var bundles = {};
-
-function loadBundle(bundle) {
-  var id;
-
-  if (Array.isArray(bundle)) {
-    id = bundle[1];
-    bundle = bundle[0];
-  }
-
-  if (bundles[bundle]) {
-    return bundles[bundle];
-  }
-
-  var type = (bundle.substring(bundle.lastIndexOf('.') + 1, bundle.length) || bundle).toLowerCase();
-  var bundleLoader = bundleLoaders[type];
-
-  if (bundleLoader) {
-    return bundles[bundle] = bundleLoader(getBundleURL() + bundle).then(function (resolved) {
-      if (resolved) {
-        module.bundle.register(id, resolved);
-      }
-
-      return resolved;
-    }).catch(function (e) {
-      delete bundles[bundle];
-      throw e;
-    });
-  }
-}
-
-function LazyPromise(executor) {
-  this.executor = executor;
-  this.promise = null;
-}
-
-LazyPromise.prototype.then = function (onSuccess, onError) {
-  if (this.promise === null) this.promise = new Promise(this.executor);
-  return this.promise.then(onSuccess, onError);
-};
-
-LazyPromise.prototype.catch = function (onError) {
-  if (this.promise === null) this.promise = new Promise(this.executor);
-  return this.promise.catch(onError);
-};
-},{"./bundle-url":"../node_modules/parcel-bundler/src/builtins/bundle-url.js"}],"../node_modules/parcel-bundler/src/builtins/loaders/browser/html-loader.js":[function(require,module,exports) {
-module.exports = function loadHTMLBundle(bundle) {
-  return fetch(bundle).then(function (res) {
-    return res.text();
-  });
-};
-},{}],0:[function(require,module,exports) {
-var b=require("../node_modules/parcel-bundler/src/builtins/bundle-loader.js");b.register("html",require("../node_modules/parcel-bundler/src/builtins/loaders/browser/html-loader.js"));b.load([["create_or_join.883facec.html","views/create_or_join.html"],["loginPage.9bd1b414.html","views/loginPage.html"]]).then(function(){require("Js/App.js");});
-},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js",0], null)
+},{}]},{},["../node_modules/parcel-bundler/src/builtins/hmr-runtime.js","Js/App.js"], null)
 //# sourceMappingURL=/App.39fd3cbd.js.map

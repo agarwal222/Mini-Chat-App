@@ -1,3 +1,4 @@
+export const CreatOrJoin = `
 <div class="creat_or_join">
     <section class="form_contaner">
         <button class="join_room" id="join_room">Join a room</button>
@@ -5,3 +6,4 @@
         <button class="creat_room" id="creat_room">Creat a room</button>
     </section>
 </div>
+`;

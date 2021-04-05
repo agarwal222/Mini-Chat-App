@@ -1,7 +1,6 @@
-import create_or_join from "../../views/create_or_join.html";
-
-export const change_page = (res, next) => {
+export const change_page = (res, next, methon) => {
     if(res == 200) {
         document.getElementById("center_left").innerHTML = next;
+        methon();
     }
 }

@@ -1,7 +1,9 @@
 import axios from 'axios';
-// import create_or_join from "../../views/create_or_join.html";
-import change_page from "../controler/change_page";
+import {CreatOrJoin} from "../views/create_or_join";
+import {change_page} from "../controler/change_page";
 import global from "../Global";
+import { join_room } from "../controler/create_or_join";
+
 
 export const check = async () => {
     // console.log("checked");
@@ -20,16 +22,14 @@ export const check = async () => {
     }).catch( err => ( console.log(err)))
 
 
-    change_page(200,"create_or_join")
-
-
+    change_page(promis.status,CreatOrJoin,join_room)
     // Changing screan if promis resolve in success
     // if(promis.status == 200) {
     //     document.getElementById("center_left").innerHTML = create_or_join;
     // }
 
 
-    // return promis.status;
+    return promis.status;
 }
 
 

@@ -1,3 +1,4 @@
+export const LoginPage = `
 <div class="login_pannel">
     <h1>Log In</h1>
     <section class="form_contaner">
@@ -8,3 +9,4 @@
         <button type="submit" id="btn" class="login_btn">Next</button>
     </section>
 </div>
+`;
