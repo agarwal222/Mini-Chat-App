@@ -1,8 +1,8 @@
 import axios from 'axios';
-import {CreatOrJoin} from "../views/create_or_join";
+import {CreatOrJoin} from "../views/createOrJoin";
 import {change_page} from "../controler/change_page";
 import global from "../Global";
-import { join_room } from "../controler/create_or_join";
+import { creat_or_join_room } from "../controler/create_or_join";
 import {LoginPage} from "../views/loginPage";
 import { login_load } from "../controler/login_load";
 
@@ -22,9 +22,9 @@ export const check = async () => {
             user_name: global.user_name,
             email : global.email
         }).catch( err => ( console.log(err)))
-        change_page(promis.status,CreatOrJoin,join_room)
+        change_page("center_left",CreatOrJoin,creat_or_join_room)
     }else{
-        change_page(200,LoginPage,login_load);
+        change_page("center_left",LoginPage,login_load);
         document.getElementById("err").innerHTML = "Can't be empty";
     }
 

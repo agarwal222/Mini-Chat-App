@@ -2668,7 +2668,7 @@ module.exports.default = axios;
 
 },{"./utils":"../node_modules/axios/lib/utils.js","./helpers/bind":"../node_modules/axios/lib/helpers/bind.js","./core/Axios":"../node_modules/axios/lib/core/Axios.js","./core/mergeConfig":"../node_modules/axios/lib/core/mergeConfig.js","./defaults":"../node_modules/axios/lib/defaults.js","./cancel/Cancel":"../node_modules/axios/lib/cancel/Cancel.js","./cancel/CancelToken":"../node_modules/axios/lib/cancel/CancelToken.js","./cancel/isCancel":"../node_modules/axios/lib/cancel/isCancel.js","./helpers/spread":"../node_modules/axios/lib/helpers/spread.js","./helpers/isAxiosError":"../node_modules/axios/lib/helpers/isAxiosError.js"}],"../node_modules/axios/index.js":[function(require,module,exports) {
 module.exports = require('./lib/axios');
-},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"Js/views/create_or_join.js":[function(require,module,exports) {
+},{"./lib/axios":"../node_modules/axios/lib/axios.js"}],"Js/views/createOrJoin.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2686,10 +2686,9 @@ Object.defineProperty(exports, "__esModule", {
 exports.change_page = void 0;
 
 var change_page = function change_page(res, next, methon) {
-  if (res == 200) {
-    document.getElementById("center_left").innerHTML = next;
-    methon();
-  }
+  console.log(res);
+  document.getElementById(res).innerHTML = next;
+  methon();
 };
 
 exports.change_page = change_page;
@@ -2707,51 +2706,108 @@ var global = {
 };
 var _default = global;
 exports.default = _default;
-},{}],"Js/Model/Join_room.js":[function(require,module,exports) {
+},{}],"Js/views/publicRoomsList.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.joinRoom = void 0;
+exports.publicRoomList = void 0;
+var publicRoomList = "\n<div class=\"create_room\">\n<h1>Public Rooms</h1>\n<section class=\"form_contaner\">\n    <p>List go here</p>\n</section>\n</div>\n";
+exports.publicRoomList = publicRoomList;
+},{}],"Js/Model/process_public_room.js":[function(require,module,exports) {
+"use strict";
 
-var joinRoom = function joinRoom() {
-  console.log("join room clicked");
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.process_public_room_list = void 0;
+
+var process_public_room_list = function process_public_room_list() {
+  console.log("it will process pubic room list");
 };
 
-exports.joinRoom = joinRoom;
-},{}],"Js/Model/creat_room.js":[function(require,module,exports) {
+exports.process_public_room_list = process_public_room_list;
+},{}],"Js/controler/Join_room_cnt.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.join_room_cnt = void 0;
+
+var _change_page = require("./change_page");
+
+var _publicRoomsList = require("../views/publicRoomsList");
+
+var _process_public_room = require("../Model/process_public_room");
+
+var join_room_cnt = function join_room_cnt() {
+  console.log("join room clicked");
+  (0, _change_page.change_page)("center_right", _publicRoomsList.publicRoomList, _process_public_room.process_public_room_list);
+};
+
+exports.join_room_cnt = join_room_cnt;
+},{"./change_page":"Js/controler/change_page.js","../views/publicRoomsList":"Js/views/publicRoomsList.js","../Model/process_public_room":"Js/Model/process_public_room.js"}],"Js/controler/creat_room_cnt.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.creat_room_cnt = void 0;
+
+var creat_room_cnt = function creat_room_cnt() {
+  console.log("creat room clicked");
+};
+
+exports.creat_room_cnt = creat_room_cnt;
+},{}],"Js/views/creatRoom.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.creatRoom = void 0;
-
-var creatRoom = function creatRoom() {
-  console.log("creat room clicked");
-};
-
+var creatRoom = "\n<div class=\"create_room\">\n<h1>Create A Room</h1>\n<section class=\"form_contaner\">\n    <label for=\"room_name\">Enter a room name</label>\n    <input type=\"text\" name=\"room_name\" id=\"room_name\">\n    <label class=\"private_room_labl\" for=\"private_room\">\n        <input type=\"checkbox\" name=\"privare_room\" id=\"private_room\" class=\"private_room_check\">\n        <spam class=\"spam_checkbox\"></spam>\n        Make the room private\n    </label>\n    <button class=\"creat_room\" id=\"creat_room\">Creat room</button>\n    <div class=\"bysection\"><h2>Or</h2></div>\n    <button class=\"join_room\" id=\"join_room\">Join a room</button>\n</section>\n</div>\n";
 exports.creatRoom = creatRoom;
+},{}],"Js/views/joinRoom.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.joinRoom = void 0;
+var joinRoom = "\n<div class=\"create_room\">\n<h1>Join A Room</h1>\n<section class=\"form_contaner\">\n    <label for=\"room_name\">Enter a room name</label>\n    <input type=\"text\" name=\"room_name\" id=\"room_name\">\n    <button class=\"creat_room\" id=\"creat_room\">Creat room</button>\n    <div class=\"bysection\"><h2>Or</h2></div>\n    <button class=\"join_room\" id=\"join_room\">Join a room</button>\n</section>\n</div>\n";
+exports.joinRoom = joinRoom;
 },{}],"Js/controler/create_or_join.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.join_room = void 0;
+exports.creat_or_join_room = void 0;
 
-var _Join_room = require("../Model/Join_room");
+var _Join_room_cnt = require("./Join_room_cnt");
 
-var _creat_room = require("../Model/creat_room");
+var _creat_room_cnt = require("./creat_room_cnt");
 
-var join_room = function join_room() {
-  document.getElementById("join_room").addEventListener("click", _Join_room.joinRoom);
-  document.getElementById("creat_room").addEventListener("click", _creat_room.creatRoom);
+var _change_page = require("./change_page");
+
+var _creatRoom = require("../views/creatRoom");
+
+var _joinRoom = require("../views/joinRoom");
+
+var creat_or_join_room = function creat_or_join_room() {
+  document.getElementById("join_room").addEventListener("click", function () {
+    (0, _change_page.change_page)("center_left", _joinRoom.joinRoom, _Join_room_cnt.join_room_cnt);
+  });
+  document.getElementById("creat_room").addEventListener("click", function () {
+    (0, _change_page.change_page)("center_left", _creatRoom.creatRoom, _creat_room_cnt.creat_room_cnt);
+  });
 };
 
-exports.join_room = join_room;
-},{"../Model/Join_room":"Js/Model/Join_room.js","../Model/creat_room":"Js/Model/creat_room.js"}],"Js/views/loginPage.js":[function(require,module,exports) {
+exports.creat_or_join_room = creat_or_join_room;
+},{"./Join_room_cnt":"Js/controler/Join_room_cnt.js","./creat_room_cnt":"Js/controler/creat_room_cnt.js","./change_page":"Js/controler/change_page.js","../views/creatRoom":"Js/views/creatRoom.js","../views/joinRoom":"Js/views/joinRoom.js"}],"Js/views/loginPage.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2771,13 +2827,13 @@ exports.check = void 0;
 
 var _axios = _interopRequireDefault(require("axios"));
 
-var _create_or_join = require("../views/create_or_join");
+var _createOrJoin = require("../views/createOrJoin");
 
 var _change_page = require("../controler/change_page");
 
 var _Global = _interopRequireDefault(require("../Global"));
 
-var _create_or_join2 = require("../controler/create_or_join");
+var _create_or_join = require("../controler/create_or_join");
 
 var _loginPage = require("../views/loginPage");
 
@@ -2817,12 +2873,12 @@ var check = /*#__PURE__*/function () {
 
           case 6:
             promis = _context.sent;
-            (0, _change_page.change_page)(promis.status, _create_or_join.CreatOrJoin, _create_or_join2.join_room);
+            (0, _change_page.change_page)("center_left", _createOrJoin.CreatOrJoin, _create_or_join.creat_or_join_room);
             _context.next = 12;
             break;
 
           case 10:
-            (0, _change_page.change_page)(200, _loginPage.LoginPage, _login_load.login_load);
+            (0, _change_page.change_page)("center_left", _loginPage.LoginPage, _login_load.login_load);
             document.getElementById("err").innerHTML = "Can't be empty";
 
           case 12:
@@ -2839,7 +2895,7 @@ var check = /*#__PURE__*/function () {
 }();
 
 exports.check = check;
-},{"axios":"../node_modules/axios/index.js","../views/create_or_join":"Js/views/create_or_join.js","../controler/change_page":"Js/controler/change_page.js","../Global":"Js/Global.js","../controler/create_or_join":"Js/controler/create_or_join.js","../views/loginPage":"Js/views/loginPage.js","../controler/login_load":"Js/controler/login_load.js"}],"Js/controler/login_load.js":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js","../views/createOrJoin":"Js/views/createOrJoin.js","../controler/change_page":"Js/controler/change_page.js","../Global":"Js/Global.js","../controler/create_or_join":"Js/controler/create_or_join.js","../views/loginPage":"Js/views/loginPage.js","../controler/login_load":"Js/controler/login_load.js"}],"Js/controler/login_load.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2851,10 +2907,11 @@ var _login_check = require("../Model/login_check");
 
 var _loginPage = require("../views/loginPage");
 
-var login_load = function login_load() {// adding login templat to main window
-  // document.getElementById("center_left").innerHTML = LoginPage;
-  // Checking for user
-  // document.getElementById("btn").addEventListener("click", check);
+var login_load = function login_load() {
+  // adding login templat to main window
+  document.getElementById("center_left").innerHTML = _loginPage.LoginPage; // Checking for user
+
+  document.getElementById("btn").addEventListener("click", _login_check.check);
 };
 
 exports.login_load = login_load;
