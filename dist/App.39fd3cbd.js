@@ -2685,11 +2685,7 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.change_page = void 0;
 
-var change_page = function change_page() {
-  var res = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 200;
-  var next = arguments.length > 1 ? arguments[1] : undefined;
-  var methon = arguments.length > 2 ? arguments[2] : undefined;
-
+var change_page = function change_page(res, next, methon) {
   if (res == 200) {
     document.getElementById("center_left").innerHTML = next;
     methon();
@@ -2855,11 +2851,10 @@ var _login_check = require("../Model/login_check");
 
 var _loginPage = require("../views/loginPage");
 
-var login_load = function login_load() {
-  // adding login templat to main window
-  document.getElementById("center_left").innerHTML = _loginPage.LoginPage; // Checking for user
-
-  document.getElementById("btn").addEventListener("click", _login_check.check);
+var login_load = function login_load() {// adding login templat to main window
+  // document.getElementById("center_left").innerHTML = LoginPage;
+  // Checking for user
+  // document.getElementById("btn").addEventListener("click", check);
 };
 
 exports.login_load = login_load;
@@ -2870,9 +2865,6 @@ require("regenerator-runtime/runtime");
 
 var _login_load = require("./controler/login_load");
 
-// import { check } from "./Model/login_check";
-// import {LoginPage} from "./views/loginPage";
-// import { join_room } from "./controler/create_or_join";
 // initialising app
 document.onload = (0, _login_load.login_load)();
 },{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","./controler/login_load":"Js/controler/login_load.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {

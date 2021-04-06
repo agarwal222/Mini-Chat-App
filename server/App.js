@@ -22,8 +22,9 @@ const users = [];
 // Post request for the nw user
 
 app.post('/users', (req,res) => {
-
-    let us_fnd
+    
+    // basic flag variables initilised
+    let us_fnd , us_del
 
     // Finding the user if already exist
     const find = users.find((val,ind) => {
@@ -52,10 +53,11 @@ app.delete("/delete/:user_name", (req,res) => {
             // console.log(ind); // index of the existing user
             users.splice(ind,1); // deleating user feom array
             res.status(200).send(users);
+            us_del = true
         }
     });
 
-    if(!delet){
+    if(!us_del){
         res.status(404).send("user not exist")
     }
     // console.log(req.params);

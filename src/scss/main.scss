@@ -5,6 +5,7 @@
 @use "components/input";
 @use "Layouts/login.scss";
 @use "Layouts/create_or_koin";
+@use "Layouts/create_room";
 
 body{
     background-color: col.$prime_bg;
@@ -39,7 +40,6 @@ body{
     display: grid;
     color: col.$text_col;
     box-shadow: 0px 0px 15px 5px rgba(22, 22, 37, 0.45);
-
 }
 
 .center_right{

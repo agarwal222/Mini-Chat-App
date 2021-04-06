@@ -1,0 +1,118 @@
+@use 'base/colors' as col;
+@use "base/font-size" as fs;
+@use "components/button";
+@use "components/input";
+
+.create_room{
+    background-color: col.$second_bg;
+    display: grid;
+    grid-template-rows: 30% 70%;
+
+    h1{
+       align-self: center;
+       justify-self: center;
+       font-size: fs.$head_font;
+    }
+
+    .form_contaner{
+        width: calc(100% - 100px);
+        margin: 0 auto;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        margin-top: -50px;
+
+        .join_room ,.creat_room {
+            margin: 1.5em;
+        }
+
+        .creat_room{
+            margin-top: 0.5em;
+        }
+        
+        .private_room_labl{
+            font-size: fs.$small_font;
+            font-weight: 500;
+            margin-bottom: 0.5em;
+            align-self: flex-start;
+            padding-left: 30px;
+            margin-top: 5px;
+            display: block;
+            position: relative;
+            cursor: pointer;
+            user-select: none;
+
+            input{
+                position: absolute;
+                opacity: 0;
+                cursor: pointer;
+                height: 0;
+                width: 0;
+            }
+
+            .spam_checkbox{
+                position: absolute;
+                top: 2px;
+                left: 2px;
+                height: 20px;
+                width: 20px;
+                background-color: col.$prime_bg;
+            }
+
+            input:checked ~ .spam_checkbox {
+                background-color: col.$text_col;
+              }
+
+              .spam_checkbox:after {
+                content: "";
+                position: absolute;
+                display: none;
+              }
+              
+              /* Show the checkmark when checked */
+              input:checked ~ .spam_checkbox:after {
+                display: block;
+              }
+              
+              /* Style the checkmark/indicator */
+              .spam_checkbox:after {
+                left: 5px;
+                top: 2px;
+                width: 5px;
+                height: 10px;
+                border: solid white;
+                border-width: 0 3px 3px 0;
+                transform: rotate(45deg);
+              }
+        }
+        
+        label{
+            font-size: fs.$base_font;
+            font-weight: 500;
+            margin-bottom: 0.5em;
+            align-self: flex-start;
+        }
+
+
+        .bysection{
+            position: relative;
+        }
+
+        .bysection::after{
+            content: '________________';
+            position: absolute;
+            height: 1px;
+            left: 35px;
+            top: -6px;
+        }
+
+        .bysection::before{
+            content: '________________';
+            position: absolute;
+            height: 1px;
+            right: 35px;
+            top: -6px;
+        }
+    }
+}
