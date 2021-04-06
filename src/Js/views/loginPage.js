@@ -8,5 +8,6 @@ export const LoginPage = `
         <input type="text" name="display_name" class="siaplay_name_input" id="display_name"><br />
         <button type="submit" id="btn" class="login_btn">Next</button>
     </section>
+    <spam id="err"></spam>
 </div>
 `;

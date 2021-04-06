@@ -23,19 +23,19 @@ const users = [];
 
 app.post('/users', (req,res) => {
 
+    let us_fnd
+
     // Finding the user if already exist
     const find = users.find((val,ind) => {
         if(req.body.user_name == val.user_name){
             console.log(ind); // index of the existing user
             res.status(500).send("User already exist");
-            return ind
-        }else{
-            return false
+            us_fnd = true
         }
     });
     
     //sending respnse if user do not exist and new user added
-    if(!find){
+    if(!us_fnd){
         console.log("Not found");
         users.push(req.body) ? res.status(200).send("New User Added") : res.status(500).send("bad request")
     }
@@ -52,9 +52,6 @@ app.delete("/delete/:user_name", (req,res) => {
             // console.log(ind); // index of the existing user
             users.splice(ind,1); // deleating user feom array
             res.status(200).send(users);
-            return ind
-        }else{
-            return false
         }
     });
 

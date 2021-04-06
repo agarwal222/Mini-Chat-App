@@ -2685,7 +2685,11 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.change_page = void 0;
 
-var change_page = function change_page(res, next, methon) {
+var change_page = function change_page() {
+  var res = arguments.length > 0 && arguments[0] !== undefined ? arguments[0] : 200;
+  var next = arguments.length > 1 ? arguments[1] : undefined;
+  var methon = arguments.length > 2 ? arguments[2] : undefined;
+
   if (res == 200) {
     document.getElementById("center_left").innerHTML = next;
     methon();
@@ -2751,7 +2755,16 @@ var join_room = function join_room() {
 };
 
 exports.join_room = join_room;
-},{"../Model/Join_room":"Js/Model/Join_room.js","../Model/creat_room":"Js/Model/creat_room.js"}],"Js/Model/login_check.js":[function(require,module,exports) {
+},{"../Model/Join_room":"Js/Model/Join_room.js","../Model/creat_room":"Js/Model/creat_room.js"}],"Js/views/loginPage.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.LoginPage = void 0;
+var LoginPage = "\n<div class=\"login_pannel\">\n    <h1>Log In</h1>\n    <section class=\"form_contaner\">\n        <label for=\"email\" class=\"email\">E-Mail</label><br />\n        <input type=\"email\" name=\"email\" class=\"email_input\" id=\"email\"><br />\n        <label for=\"display_name\" class=\"display_name\">Display Name</label><br />\n        <input type=\"text\" name=\"display_name\" class=\"siaplay_name_input\" id=\"display_name\"><br />\n        <button type=\"submit\" id=\"btn\" class=\"login_btn\">Next</button>\n    </section>\n    <spam id=\"err\"></spam>\n</div>\n";
+exports.LoginPage = LoginPage;
+},{}],"Js/Model/login_check.js":[function(require,module,exports) {
 
 "use strict";
 
@@ -2770,6 +2783,10 @@ var _Global = _interopRequireDefault(require("../Global"));
 
 var _create_or_join2 = require("../controler/create_or_join");
 
+var _loginPage = require("../views/loginPage");
+
+var _login_load = require("../controler/login_load");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -2783,14 +2800,18 @@ var check = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            // console.log("checked");
             // getting the data deom page 
             _Global.default.user_name = document.getElementById("display_name").value;
             _Global.default.email = document.getElementById("email").value; // the loading screan before call is done
 
             document.getElementById("center_left").innerHTML = "Loading..."; // Making the POST api call
 
-            _context.next = 5;
+            if (!(_Global.default.user_name && _Global.default.email)) {
+              _context.next = 10;
+              break;
+            }
+
+            _context.next = 6;
             return _axios.default.post("http://localhost:3000/users", {
               user_name: _Global.default.user_name,
               email: _Global.default.email
@@ -2798,16 +2819,17 @@ var check = /*#__PURE__*/function () {
               return console.log(err);
             });
 
-          case 5:
+          case 6:
             promis = _context.sent;
-            (0, _change_page.change_page)(promis.status, _create_or_join.CreatOrJoin, _create_or_join2.join_room); // Changing screan if promis resolve in success
-            // if(promis.status == 200) {
-            //     document.getElementById("center_left").innerHTML = create_or_join;
-            // }
+            (0, _change_page.change_page)(promis.status, _create_or_join.CreatOrJoin, _create_or_join2.join_room);
+            _context.next = 12;
+            break;
 
-            return _context.abrupt("return", promis.status);
+          case 10:
+            (0, _change_page.change_page)(200, _loginPage.LoginPage, _login_load.login_load);
+            document.getElementById("err").innerHTML = "Can't be empty";
 
-          case 8:
+          case 12:
           case "end":
             return _context.stop();
         }
@@ -2821,35 +2843,39 @@ var check = /*#__PURE__*/function () {
 }();
 
 exports.check = check;
-},{"axios":"../node_modules/axios/index.js","../views/create_or_join":"Js/views/create_or_join.js","../controler/change_page":"Js/controler/change_page.js","../Global":"Js/Global.js","../controler/create_or_join":"Js/controler/create_or_join.js"}],"Js/views/loginPage.js":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js","../views/create_or_join":"Js/views/create_or_join.js","../controler/change_page":"Js/controler/change_page.js","../Global":"Js/Global.js","../controler/create_or_join":"Js/controler/create_or_join.js","../views/loginPage":"Js/views/loginPage.js","../controler/login_load":"Js/controler/login_load.js"}],"Js/controler/login_load.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.LoginPage = void 0;
-var LoginPage = "\n<div class=\"login_pannel\">\n    <h1>Log In</h1>\n    <section class=\"form_contaner\">\n        <label for=\"email\" class=\"email\">E-Mail</label><br />\n        <input type=\"email\" name=\"email\" class=\"email_input\" id=\"email\"><br />\n        <label for=\"display_name\" class=\"display_name\">Display Name</label><br />\n        <input type=\"text\" name=\"display_name\" class=\"siaplay_name_input\" id=\"display_name\"><br />\n        <button type=\"submit\" id=\"btn\" class=\"login_btn\">Next</button>\n    </section>\n</div>\n";
-exports.LoginPage = LoginPage;
-},{}],"Js/App.js":[function(require,module,exports) {
-"use strict";
+exports.login_load = void 0;
 
-require("regenerator-runtime/runtime");
+var _login_check = require("../Model/login_check");
 
-var _login_check = require("./Model/login_check");
+var _loginPage = require("../views/loginPage");
 
-var _loginPage = require("./views/loginPage");
-
-// import { join_room } from "./controler/create_or_join";
 var login_load = function login_load() {
   // adding login templat to main window
   document.getElementById("center_left").innerHTML = _loginPage.LoginPage; // Checking for user
 
   document.getElementById("btn").addEventListener("click", _login_check.check);
-}; // initialising app
+};
 
+exports.login_load = login_load;
+},{"../Model/login_check":"Js/Model/login_check.js","../views/loginPage":"Js/views/loginPage.js"}],"Js/App.js":[function(require,module,exports) {
+"use strict";
 
-document.onload = login_load();
-},{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","./Model/login_check":"Js/Model/login_check.js","./views/loginPage":"Js/views/loginPage.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
+require("regenerator-runtime/runtime");
+
+var _login_load = require("./controler/login_load");
+
+// import { check } from "./Model/login_check";
+// import {LoginPage} from "./views/loginPage";
+// import { join_room } from "./controler/create_or_join";
+// initialising app
+document.onload = (0, _login_load.login_load)();
+},{"regenerator-runtime/runtime":"../node_modules/regenerator-runtime/runtime.js","./controler/login_load":"Js/controler/login_load.js"}],"../node_modules/parcel-bundler/src/builtins/hmr-runtime.js":[function(require,module,exports) {
 var global = arguments[3];
 var OVERLAY_ID = '__parcel__error__overlay__';
 var OldModule = module.bundle.Module;
@@ -2877,7 +2903,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "61858" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53302" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
