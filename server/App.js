@@ -34,7 +34,7 @@ const rooms = [
     // }
 ];
 
-// Post request for the nw user
+// Post request for the new user
 app.post('/users', (req,res) => {
     
     // basic flag variables initilised
@@ -83,6 +83,12 @@ app.get("/rooms/public", (req,res) => {
         return val.isPublic
     })
     res.status(200).send(public_rooms)
+})
+
+// POST request for new room
+app.post('/rooms', (req,res) => {
+    console.log(req.body);
+    rooms.push(req.body) ? res.status(200).send("New room added") : res.status(500).send("Bad Request")
 })
 
 // Server Listning

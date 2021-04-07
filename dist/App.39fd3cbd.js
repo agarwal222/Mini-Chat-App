@@ -2709,7 +2709,12 @@ Object.defineProperty(exports, "__esModule", {
 exports.public_rooms = exports.global = void 0;
 var global = {
   "user_name": "",
-  "email": ""
+  "email": "",
+  "room": {
+    "roomName": "",
+    "roonID": 555,
+    "isPrivate": false
+  }
 };
 exports.global = global;
 var public_rooms = []; // export default global;
@@ -2817,7 +2822,61 @@ var join_room_cnt = function join_room_cnt() {
 };
 
 exports.join_room_cnt = join_room_cnt;
-},{"./change_page":"Js/controler/change_page.js","../views/publicRoomsList":"Js/views/publicRoomsList.js","../Model/process_public_room":"Js/Model/process_public_room.js"}],"Js/controler/creat_room_cnt.js":[function(require,module,exports) {
+},{"./change_page":"Js/controler/change_page.js","../views/publicRoomsList":"Js/views/publicRoomsList.js","../Model/process_public_room":"Js/Model/process_public_room.js"}],"Js/Model/create_new_room.js":[function(require,module,exports) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.create_new_room = void 0;
+
+var _Global = require("../Global");
+
+var _axios = _interopRequireDefault(require("axios"));
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var create_new_room = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var post_new_room;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return _axios.default.post("http://localhost:3000/rooms", {
+              roomName: _Global.global.user_name,
+              roomID: _Global.global.room.roomID,
+              isPrivate: _Global.global.room.isPrivate
+            }).catch(function (err) {
+              return console.log(err);
+            });
+
+          case 2:
+            post_new_room = _context.sent;
+            console.log(post_new_room);
+
+          case 4:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function create_new_room() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+exports.create_new_room = create_new_room;
+},{"../Global":"Js/Global.js","axios":"../node_modules/axios/index.js"}],"Js/controler/creat_room_cnt.js":[function(require,module,exports) {
+
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2825,12 +2884,34 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.creat_room_cnt = void 0;
 
+var _Global = require("../Global");
+
+var _create_new_room = require("../Model/create_new_room");
+
 var creat_room_cnt = function creat_room_cnt() {
-  console.log("creat room clicked");
+  document.getElementById("creat_room").addEventListener("click", function () {
+    var roomName = document.getElementById("room_name").value;
+    var isPrivate = document.getElementById("private_room");
+    var Id = Date.now();
+
+    if (isPrivate.checked) {
+      _Global.global.room.roomName = roomName;
+      _Global.global.room.roonID = Id;
+      _Global.global.room.isPrivate = true;
+      (0, _create_new_room.create_new_room)();
+      console.log(_Global.global);
+    } else {
+      _Global.global.room.roomName = roomName;
+      _Global.global.room.roonID = Id;
+      _Global.global.room.isPrivate = false;
+      console.log(_Global.global);
+      (0, _create_new_room.create_new_room)();
+    }
+  });
 };
 
 exports.creat_room_cnt = creat_room_cnt;
-},{}],"Js/views/creatRoom.js":[function(require,module,exports) {
+},{"../Global":"Js/Global.js","../Model/create_new_room":"Js/Model/create_new_room.js"}],"Js/views/creatRoom.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

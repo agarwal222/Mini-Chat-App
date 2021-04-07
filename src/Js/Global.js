@@ -1,6 +1,11 @@
 export const global = {
     "user_name" : "",
-    "email" : ""
+    "email" : "",
+    "room" : {
+        "roomName" : "",
+        "roonID" : 555,
+        "isPrivate" : false
+    }
 }
 
 export const public_rooms = []
