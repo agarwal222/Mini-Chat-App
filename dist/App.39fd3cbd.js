@@ -2712,7 +2712,7 @@ var global = {
   "email": "",
   "room": {
     "roomName": "",
-    "roonID": 555,
+    "roomID": 555,
     "isPrivate": false
   }
 };
@@ -2850,7 +2850,8 @@ var create_new_room = /*#__PURE__*/function () {
           case 0:
             _context.next = 2;
             return _axios.default.post("http://localhost:3000/rooms", {
-              roomName: _Global.global.user_name,
+              userName: _Global.global.user_name,
+              roomName: _Global.global.room.roomName,
               roomID: _Global.global.room.roomID,
               isPrivate: _Global.global.room.isPrivate
             }).catch(function (err) {
@@ -2896,7 +2897,7 @@ var creat_room_cnt = function creat_room_cnt() {
 
     if (isPrivate.checked) {
       _Global.global.room.roomName = roomName;
-      _Global.global.room.roonID = Id;
+      _Global.global.room.roomID = Id;
       _Global.global.room.isPrivate = true;
       (0, _create_new_room.create_new_room)();
       console.log(_Global.global);

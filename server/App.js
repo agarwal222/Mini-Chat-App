@@ -20,7 +20,6 @@ const users = [
     // {
     //     "Name" : "Name of the user or userName",
     //     "email" : "Email of the user",
-    //     "room" : "Room that he joined in"
     // }
 ];
 
@@ -28,11 +27,22 @@ const users = [
 const rooms = [
     // room object example
     // {
-    //     "Name" : "Name of the Room",
-    //     "room_id" : "ID of the room",
+    //     "roomName" : "Name of the Room",
+    //     "roomID" : "ID of the room",
     //     "isPrivate" : true or false (booion value)
+    //     "users" : [array of users]
     // }
 ];
+
+// user_room_relation data structure
+const user_room_relation = [
+    // user_room_relation array structure example
+    // {
+            // "userName" : "user's name (siaplay name)",
+            // "roomName" : "room name he / she jponed in",
+            // "roomID" : the room ID of the room
+    // }
+]
 
 // Post request for the new user
 app.post('/users', (req,res) => {
@@ -87,8 +97,23 @@ app.get("/rooms/public", (req,res) => {
 
 // POST request for new room
 app.post('/rooms', (req,res) => {
-    console.log(req.body);
-    rooms.push(req.body) ? res.status(200).send("New room added") : res.status(500).send("Bad Request")
+    //pushing user room relation info
+    user_room_relation.push({
+        "userName" : req.body.userName,
+        "roomName" : req.body.roomName,
+        "roomID" : req.body.roomID
+    })
+
+    console.log(user_room_relation);
+
+    // pushing room info to rooms array
+    rooms.push({
+        "roomName" : req.body.roomName,
+        "roomID" : req.body.roomID,
+        "isPrivate" : req.body.isPrivate,
+    }) ? res.status(200).send(req.body) : res.status(500).send("Bad Request")
+
+    console.log(rooms);
 })
 
 // Server Listning

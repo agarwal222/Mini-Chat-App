@@ -3,7 +3,7 @@ export const global = {
     "email" : "",
     "room" : {
         "roomName" : "",
-        "roonID" : 555,
+        "roomID" : 555,
         "isPrivate" : false
     }
 }

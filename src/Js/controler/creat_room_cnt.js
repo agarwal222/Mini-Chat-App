@@ -8,7 +8,7 @@ export const creat_room_cnt = () => {
         const Id = Date.now()
         if(isPrivate.checked){
             global.room.roomName = roomName
-            global.room.roonID = Id
+            global.room.roomID = Id
             global.room.isPrivate = true
             create_new_room();
             console.log(global);
