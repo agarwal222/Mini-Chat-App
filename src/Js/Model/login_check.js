@@ -1,7 +1,7 @@
 import axios from 'axios';
 import {CreatOrJoin} from "../views/createOrJoin";
 import {change_page} from "../controler/change_page";
-import global from "../Global";
+import { global } from "../Global";
 import { creat_or_join_room } from "../controler/create_or_join";
 import {LoginPage} from "../views/loginPage";
 import { login_load } from "../controler/login_load";

@@ -2683,7 +2683,7 @@ exports.CreatOrJoin = CreatOrJoin;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.change_page = void 0;
+exports.change_element = exports.change_page = void 0;
 
 var change_page = function change_page(res, next, methon) {
   console.log(res);
@@ -2692,6 +2692,13 @@ var change_page = function change_page(res, next, methon) {
 };
 
 exports.change_page = change_page;
+
+var change_element = function change_element(res, next) {
+  console.log(res);
+  document.getElementById(res).innerHTML = next;
+};
+
+exports.change_element = change_element;
 },{}],"Js/Global.js":[function(require,module,exports) {
 
 "use strict";
@@ -2699,13 +2706,15 @@ exports.change_page = change_page;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.default = void 0;
+exports.public_rooms = exports.global = void 0;
 var global = {
   "user_name": "",
   "email": ""
 };
-var _default = global;
-exports.default = _default;
+exports.global = global;
+var public_rooms = []; // export default global;
+
+exports.public_rooms = public_rooms;
 },{}],"Js/views/publicRoomsList.js":[function(require,module,exports) {
 "use strict";
 
@@ -2713,9 +2722,12 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.publicRoomList = void 0;
-var publicRoomList = "\n<div class=\"create_room\">\n<h1>Public Rooms</h1>\n<section class=\"form_contaner\">\n    <p>List go here</p>\n</section>\n</div>\n";
+
+var _Global = require("../Global");
+
+var publicRoomList = "\n<h1>Public Rooms</h1>\n<section class=\"public_rooms_list\">\n    <!-- <p>List of Public rooms</p> -->\n    <ul id=\"ul_pub_room\">\n        \n    </ul>\n</section>\n";
 exports.publicRoomList = publicRoomList;
-},{}],"Js/Model/process_public_room.js":[function(require,module,exports) {
+},{"../Global":"Js/Global.js"}],"Js/Model/process_public_room.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2723,12 +2735,69 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.process_public_room_list = void 0;
 
-var process_public_room_list = function process_public_room_list() {
-  console.log("it will process pubic room list");
-};
+var _axios = _interopRequireDefault(require("axios"));
+
+var _Global = require("../Global");
+
+var _change_page = require("../controler/change_page");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var process_public_room_list = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var pb_room_list, ui;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            // the loading screan before loading public room list
+            (0, _change_page.change_element)("ul_pub_room", "LOADING"); // GET request to public rooms api
+
+            _context.next = 3;
+            return _axios.default.get("http://localhost:3000/rooms/public").catch(function (err) {
+              return console.log(err.data);
+            });
+
+          case 3:
+            pb_room_list = _context.sent;
+
+            if (pb_room_list.data.length !== 0) {
+              // checking data length
+              // Creating list elements if leangth is more then 0
+              ui = document.getElementById("ul_pub_room");
+              (0, _change_page.change_element)("ul_pub_room", "");
+              pb_room_list.data.forEach(function (val) {
+                _Global.public_rooms.push(val.Name); // Pushing public rooms to global clint side
+
+
+                var li = document.createElement('li');
+                ui.appendChild(li);
+                li.innerHTML += val.Name;
+              });
+            } else {
+              // else error handling 
+              (0, _change_page.change_element)("ul_pub_room", "Not Found");
+            }
+
+          case 5:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function process_public_room_list() {
+    return _ref.apply(this, arguments);
+  };
+}();
 
 exports.process_public_room_list = process_public_room_list;
-},{}],"Js/controler/Join_room_cnt.js":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js","../Global":"Js/Global.js","../controler/change_page":"Js/controler/change_page.js"}],"Js/controler/Join_room_cnt.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2777,7 +2846,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.joinRoom = void 0;
-var joinRoom = "\n<div class=\"create_room\">\n<h1>Join A Room</h1>\n<section class=\"form_contaner\">\n    <label for=\"room_name\">Enter a room name</label>\n    <input type=\"text\" name=\"room_name\" id=\"room_name\">\n    <button class=\"creat_room\" id=\"creat_room\">Creat room</button>\n    <div class=\"bysection\"><h2>Or</h2></div>\n    <button class=\"join_room\" id=\"join_room\">Join a room</button>\n</section>\n</div>\n";
+var joinRoom = "\n<div class=\"join_room\">\n<h1>Join A Room</h1>\n<section class=\"form_contaner\">\n    <label for=\"room_id\">Enter a room ID</label>\n    <input type=\"text\" name=\"room_id\" id=\"room_id\">\n    <button class=\"join_room_id\" id=\"join_room_id\">Join Room</button>\n    <div class=\"bysection\"><h2>Or</h2></div>\n    <button class=\"creat_room\" id=\"creat_room\">Create a room</button>\n</section>\n</div>\n";
 exports.joinRoom = joinRoom;
 },{}],"Js/controler/create_or_join.js":[function(require,module,exports) {
 "use strict";
@@ -2831,7 +2900,7 @@ var _createOrJoin = require("../views/createOrJoin");
 
 var _change_page = require("../controler/change_page");
 
-var _Global = _interopRequireDefault(require("../Global"));
+var _Global = require("../Global");
 
 var _create_or_join = require("../controler/create_or_join");
 
@@ -2853,20 +2922,20 @@ var check = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             // getting the data deom page 
-            _Global.default.user_name = document.getElementById("display_name").value;
-            _Global.default.email = document.getElementById("email").value; // the loading screan before call is done
+            _Global.global.user_name = document.getElementById("display_name").value;
+            _Global.global.email = document.getElementById("email").value; // the loading screan before call is done
 
             document.getElementById("center_left").innerHTML = "Loading..."; // Making the POST api call
 
-            if (!(_Global.default.user_name && _Global.default.email)) {
+            if (!(_Global.global.user_name && _Global.global.email)) {
               _context.next = 10;
               break;
             }
 
             _context.next = 6;
             return _axios.default.post("http://localhost:3000/users", {
-              user_name: _Global.default.user_name,
-              email: _Global.default.email
+              user_name: _Global.global.user_name,
+              email: _Global.global.email
             }).catch(function (err) {
               return console.log(err);
             });
@@ -2952,7 +3021,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "53302" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57685" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

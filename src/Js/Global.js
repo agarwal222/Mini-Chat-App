@@ -1,6 +1,8 @@
-const global = {
+export const global = {
     "user_name" : "",
     "email" : ""
 }
 
-export default global;
+export const public_rooms = []
+
+// export default global;

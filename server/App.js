@@ -4,7 +4,6 @@ const { exit } = require('process');
 const app  = express();
 
 // Middleware
-
 app.use(express.urlencoded({extended:false}))
 app.use(express.json());
 
@@ -16,11 +15,26 @@ app.use(function(req, res, next) {
   });
 
 // Users Data Structure
+const users = [
+    // user object example
+    // {
+    //     "Name" : "Name of the user or userName",
+    //     "email" : "Email of the user",
+    //     "room" : "Room that he joined in"
+    // }
+];
 
-const users = [];
+// Rooms data structure
+const rooms = [
+    // room object example
+    // {
+    //     "Name" : "Name of the Room",
+    //     "room_id" : "ID of the room",
+    //     "isPrivate" : true or false (booion value)
+    // }
+];
 
 // Post request for the nw user
-
 app.post('/users', (req,res) => {
     
     // basic flag variables initilised
@@ -44,7 +58,6 @@ app.post('/users', (req,res) => {
 })
 
 // Delete request for the user
-
 app.delete("/delete/:user_name", (req,res) => {
 
     // deleating the user once found
@@ -63,8 +76,16 @@ app.delete("/delete/:user_name", (req,res) => {
     // console.log(req.params);
 })
 
-// Server Listning
+// GET api for Public rooms
+app.get("/rooms/public", (req,res) => {
+    // checking if the room is public or not
+    const public_rooms = rooms.filter((val,ind) => {
+        return val.isPublic
+    })
+    res.status(200).send(public_rooms)
+})
 
+// Server Listning
 app.listen(3000 , () => (
     console.log("Server running")
 ))
