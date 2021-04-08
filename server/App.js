@@ -2,6 +2,13 @@ const express = require('express');
 const http = require('http');
 const { exit } = require('process');
 const app  = express();
+const server = http.createServer(app)
+const io = require('socket.io')(server ,{
+  cors: {
+    origin: "*",
+    methods: ["GET", "POST"]
+  }
+})
 
 // Middleware
 app.use(express.urlencoded({extended:false}))
@@ -30,7 +37,6 @@ const rooms = [
     //     "roomName" : "Name of the Room",
     //     "roomID" : "ID of the room",
     //     "isPrivate" : true or false (booion value)
-    //     "users" : [array of users]
     // }
 ];
 
@@ -116,7 +122,16 @@ app.post('/rooms', (req,res) => {
     console.log(rooms);
 })
 
+// socket io testing
+console.log("reached to chatroom");
+io.on("connection", (soc) => {
+    soc.on("user",(socc) => {
+        console.log(socc);
+    })
+})
+
+
 // Server Listning
-app.listen(3000 , () => (
+server.listen(3000 , () => (
     console.log("Server running")
 ))

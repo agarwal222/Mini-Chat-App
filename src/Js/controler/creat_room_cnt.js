@@ -1,5 +1,8 @@
 import { global } from "../Global";
 import { create_new_room } from "../Model/create_new_room";
+import { change_page } from "./change_page";
+import { chatRoom } from "../views/chatRoom";
+import { chat_room_start } from "../Model/chat_room_start";
 
 export const creat_room_cnt = () => {
     document.getElementById("creat_room").addEventListener("click", () => {
@@ -12,12 +15,14 @@ export const creat_room_cnt = () => {
             global.room.isPrivate = true
             create_new_room();
             console.log(global);
+            change_page("center_left", chatRoom , chat_room_start)
         }else{
             global.room.roomName = roomName
             global.room.roonID = Id
             global.room.isPrivate = false
             console.log(global);
             create_new_room();
+            change_page("center_left", chatRoom , chat_room_start)
         }
     })
 }
