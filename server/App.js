@@ -123,10 +123,11 @@ app.post('/rooms', (req,res) => {
 })
 
 // socket io testing
-console.log("reached to chatroom");
 io.on("connection", (soc) => {
+    console.log("connction mad with socket");
     soc.on("user",(socc) => {
         console.log(socc);
+        soc.join(socc.room_id)
     })
 })
 

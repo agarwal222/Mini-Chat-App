@@ -9,14 +9,14 @@ import { login_load } from "../controler/login_load";
 
 export const check = async () => {
 
-    // getting the data deom page 
+    // getting the data page 
     global.user_name = document.getElementById("display_name").value
     global.email = document.getElementById("email").value
 
     // the loading screan before call is done
     document.getElementById("center_left").innerHTML = "Loading...";
 
-    // Making the POST api call
+    // Making the POST API call
     if(global.user_name && global.email){
         const promis = await axios.post("http://localhost:3000/users",{
             user_name: global.user_name,

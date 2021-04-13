@@ -234,6 +234,58 @@ input {
   top: -6px;
 }
 
+.chat_room {
+  display: grid;
+  grid-template-rows: 90% 10%;
+}
+.chat_room .chat_area {
+  width: calc(100% - 60px);
+  justify-self: center;
+}
+.chat_room .chat_area .label {
+  font-size: 1.5em;
+  font-weight: 500;
+  margin: 0.2em;
+  margin-bottom: 0.3em;
+  align-self: flex-start;
+}
+.chat_room .chat_area .chat_contaner {
+  width: 100%;
+  height: calc(100% - 60px);
+  max-height: 500px;
+  background-color: #3C3B66;
+  border: 1px solid #8585C7;
+  overflow-y: scroll;
+}
+.chat_room .chat_area .chat_contaner .me {
+  float: right;
+}
+.chat_room .chat_area .chat_contaner .msg_contaner {
+  display: grid;
+  grid-template-rows: auto auto;
+  background-color: #232358;
+  width: 50%;
+  max-width: 200px;
+  border-radius: 10px;
+  padding: 0.2em 1em;
+  margin: 0.5em;
+}
+.chat_room .form_contaner {
+  margin-top: -30px;
+  display: grid;
+  grid-template-columns: 80% 20%;
+  width: calc(100% - 60px);
+  justify-self: center;
+  align-self: center;
+}
+.chat_room .form_contaner input {
+  padding: 1em;
+}
+.chat_room .form_contaner button {
+  margin: 0;
+  padding: 0.4em 0.8em;
+}
+
 body {
   background-color: #24243D;
 }

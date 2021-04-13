@@ -2883,7 +2883,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.chatRoom = void 0;
-var chatRoom = "\n<div class=\"join_room\">\n<h1>Join A Room</h1>\n<section class=\"form_contaner\">\n    <label for=\"room_id\">Enter a room ID</label>\n    <input type=\"text\" name=\"room_id\" id=\"room_id\">\n    <button class=\"join_room_id\" id=\"join_room_id\">Join Room</button>\n    <div class=\"bysection\"><h2>Or</h2></div>\n    <button class=\"creat_room\" id=\"creat_room\">Create a room</button>\n</section>\n</div>\n";
+var chatRoom = "\n<div class=\"chat_room\">\n    <section class=\"chat_area\">\n        <h2 class=\"label\">Chat Room</h2>\n        <div class=\"chat_contaner\">\n            <!-- <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"me msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque aperiam porro dolore repudiandae molestiae dolor dolorum delectus possimus provident id hic minima in, beatae modi ipsa consectetur rem ratione impedit nesciunt at placeat maxime repellendus itaque. Expedita quaerat veritatis ipsa sunt nobis beatae quos, corporis, modi dolorum ab, quidem quisquam!</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div> -->\n        </div>\n    </section>\n    <section class=\"form_contaner\">\n        <input type=\"text\" name=\"chat_msg\" id=\"chat_msh\">\n        <button id=\"chat_send_btn\" class=\"send_btn\">></button>\n    </section>\n</div>\n";
 exports.chatRoom = chatRoom;
 },{}],"../node_modules/parseuri/index.js":[function(require,module,exports) {
 /**
@@ -10305,6 +10305,7 @@ Object.defineProperty(exports, "Manager", {
 });
 exports.default = lookup;
 },{"./url":"../node_modules/socket.io-client/build/url.js","./manager":"../node_modules/socket.io-client/build/manager.js","./socket":"../node_modules/socket.io-client/build/socket.js","debug":"../node_modules/debug/src/browser.js","socket.io-parser":"../node_modules/socket.io-parser/dist/index.js"}],"Js/Model/chat_room_start.js":[function(require,module,exports) {
+
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10314,18 +10315,23 @@ exports.chat_room_start = void 0;
 
 var _socket = require("socket.io-client");
 
+var _Global = require("../Global");
+
 var chat_room_start = function chat_room_start() {
   var socket = (0, _socket.io)("http://localhost:3000"); // establishing connetion
 
   socket.on("connect", function () {
-    socket.emit("user", "username and room detail here"); //will send username and room details from global
+    socket.emit("user", {
+      user_name: _Global.global.user_name,
+      room_id: _Global.global.room.roomID
+    }); //will send username and room details from global
 
     console.log("its starting"); // just a tesing log
   });
 };
 
 exports.chat_room_start = chat_room_start;
-},{"socket.io-client":"../node_modules/socket.io-client/build/index.js"}],"Js/controler/creat_room_cnt.js":[function(require,module,exports) {
+},{"socket.io-client":"../node_modules/socket.io-client/build/index.js","../Global":"Js/Global.js"}],"Js/controler/creat_room_cnt.js":[function(require,module,exports) {
 
 "use strict";
 
@@ -10460,11 +10466,11 @@ var check = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            // getting the data deom page 
+            // getting the data page 
             _Global.global.user_name = document.getElementById("display_name").value;
             _Global.global.email = document.getElementById("email").value; // the loading screan before call is done
 
-            document.getElementById("center_left").innerHTML = "Loading..."; // Making the POST api call
+            document.getElementById("center_left").innerHTML = "Loading..."; // Making the POST API call
 
             if (!(_Global.global.user_name && _Global.global.email)) {
               _context.next = 10;
@@ -10560,7 +10566,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "62482" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51427" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

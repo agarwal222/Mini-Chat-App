@@ -1,12 +1,33 @@
 export const chatRoom = `
-<div class="join_room">
-<h1>Join A Room</h1>
-<section class="form_contaner">
-    <label for="room_id">Enter a room ID</label>
-    <input type="text" name="room_id" id="room_id">
-    <button class="join_room_id" id="join_room_id">Join Room</button>
-    <div class="bysection"><h2>Or</h2></div>
-    <button class="creat_room" id="creat_room">Create a room</button>
-</section>
+<div class="chat_room">
+    <section class="chat_area">
+        <h2 class="label">Chat Room</h2>
+        <div class="chat_contaner">
+            <!-- <div class="msg_contaner">
+                <h5 class="user_name">Utkarsh</h5>
+                <div class="msg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>
+            </div>
+            <div class="msg_contaner">
+                <h5 class="user_name">Utkarsh</h5>
+                <div class="msg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>
+            </div>
+            <div class="me msg_contaner">
+                <h5 class="user_name">Utkarsh</h5>
+                <div class="msg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>
+            </div>
+            <div class="msg_contaner">
+                <h5 class="user_name">Utkarsh</h5>
+                <div class="msg">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque aperiam porro dolore repudiandae molestiae dolor dolorum delectus possimus provident id hic minima in, beatae modi ipsa consectetur rem ratione impedit nesciunt at placeat maxime repellendus itaque. Expedita quaerat veritatis ipsa sunt nobis beatae quos, corporis, modi dolorum ab, quidem quisquam!</div>
+            </div>
+            <div class="msg_contaner">
+                <h5 class="user_name">Utkarsh</h5>
+                <div class="msg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>
+            </div> -->
+        </div>
+    </section>
+    <section class="form_contaner">
+        <input type="text" name="chat_msg" id="chat_msh">
+        <button id="chat_send_btn" class="send_btn">></button>
+    </section>
 </div>
 `
