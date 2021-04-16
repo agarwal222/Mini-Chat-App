@@ -2,7 +2,7 @@ import { global } from "../Global";
 import { create_new_room } from "../Model/create_new_room";
 import { change_page } from "./change_page";
 import { chatRoom } from "../views/chatRoom";
-import { chat_room_start } from "../Model/chat_room_start";
+import { chat_room_start } from "../Model/send_msg";
 
 export const creat_room_cnt = () => {
     document.getElementById("creat_room").addEventListener("click", () => {

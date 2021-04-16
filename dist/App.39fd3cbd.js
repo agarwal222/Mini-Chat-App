@@ -10304,7 +10304,7 @@ Object.defineProperty(exports, "Manager", {
   }
 });
 exports.default = lookup;
-},{"./url":"../node_modules/socket.io-client/build/url.js","./manager":"../node_modules/socket.io-client/build/manager.js","./socket":"../node_modules/socket.io-client/build/socket.js","debug":"../node_modules/debug/src/browser.js","socket.io-parser":"../node_modules/socket.io-parser/dist/index.js"}],"Js/Model/chat_room_start.js":[function(require,module,exports) {
+},{"./url":"../node_modules/socket.io-client/build/url.js","./manager":"../node_modules/socket.io-client/build/manager.js","./socket":"../node_modules/socket.io-client/build/socket.js","debug":"../node_modules/debug/src/browser.js","socket.io-parser":"../node_modules/socket.io-parser/dist/index.js"}],"Js/Model/send_msg.js":[function(require,module,exports) {
 
 "use strict";
 
@@ -10317,8 +10317,26 @@ var _socket = require("socket.io-client");
 
 var _Global = require("../Global");
 
+function _readOnlyError(name) { throw new TypeError("\"" + name + "\" is read-only"); }
+
+// import { send_msg } from "../Model/send_msg";
+// import { ws_con } from "../socket_connect";
 var chat_room_start = function chat_room_start() {
-  var socket = (0, _socket.io)("http://localhost:3000"); // establishing connetion
+  var socket = (0, _socket.io)("http://localhost:3000"); // Event Listners for sending msg
+
+  document.getElementById("chat_send_btn").addEventListener("click", function () {
+    // Grabing Value from input field
+    var msg_input = document.getElementById("chat_msh");
+    var msg = msg_input.value; // Sending msg package to server
+
+    socket.emit("msg_req", {
+      "userName": _Global.global.user_name,
+      "roomID": _Global.global.room.roomID,
+      "message": msg
+    }); // emptying the input area
+
+    msg = (_readOnlyError("msg"), "");
+  }); // establishing connetion
 
   socket.on("connect", function () {
     socket.emit("user", {
@@ -10348,7 +10366,7 @@ var _change_page = require("./change_page");
 
 var _chatRoom = require("../views/chatRoom");
 
-var _chat_room_start = require("../Model/chat_room_start");
+var _send_msg = require("../Model/send_msg");
 
 var creat_room_cnt = function creat_room_cnt() {
   document.getElementById("creat_room").addEventListener("click", function () {
@@ -10362,20 +10380,20 @@ var creat_room_cnt = function creat_room_cnt() {
       _Global.global.room.isPrivate = true;
       (0, _create_new_room.create_new_room)();
       console.log(_Global.global);
-      (0, _change_page.change_page)("center_left", _chatRoom.chatRoom, _chat_room_start.chat_room_start);
+      (0, _change_page.change_page)("center_left", _chatRoom.chatRoom, _send_msg.chat_room_start);
     } else {
       _Global.global.room.roomName = roomName;
       _Global.global.room.roonID = Id;
       _Global.global.room.isPrivate = false;
       console.log(_Global.global);
       (0, _create_new_room.create_new_room)();
-      (0, _change_page.change_page)("center_left", _chatRoom.chatRoom, _chat_room_start.chat_room_start);
+      (0, _change_page.change_page)("center_left", _chatRoom.chatRoom, _send_msg.chat_room_start);
     }
   });
 };
 
 exports.creat_room_cnt = creat_room_cnt;
-},{"../Global":"Js/Global.js","../Model/create_new_room":"Js/Model/create_new_room.js","./change_page":"Js/controler/change_page.js","../views/chatRoom":"Js/views/chatRoom.js","../Model/chat_room_start":"Js/Model/chat_room_start.js"}],"Js/views/creatRoom.js":[function(require,module,exports) {
+},{"../Global":"Js/Global.js","../Model/create_new_room":"Js/Model/create_new_room.js","./change_page":"Js/controler/change_page.js","../views/chatRoom":"Js/views/chatRoom.js","../Model/send_msg":"Js/Model/send_msg.js"}],"Js/views/creatRoom.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10566,7 +10584,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51427" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58570" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

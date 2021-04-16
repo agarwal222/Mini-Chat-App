@@ -129,6 +129,9 @@ io.on("connection", (soc) => {
         console.log(socc);
         soc.join(socc.room_id)
     })
+    soc.on("msg_req" ,(msg_obj) => {
+        console.log(msg_obj);
+    })
 })
 
 
