@@ -2712,7 +2712,7 @@ var global = {
   "email": "",
   "room": {
     "roomName": "",
-    "roomID": 555,
+    "roomID": 0,
     "isPrivate": false
   }
 };
@@ -2883,7 +2883,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.chatRoom = void 0;
-var chatRoom = "\n<div class=\"chat_room\">\n    <section class=\"chat_area\">\n        <h2 class=\"label\">Chat Room</h2>\n        <div class=\"chat_contaner\">\n            <!-- <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"me msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque aperiam porro dolore repudiandae molestiae dolor dolorum delectus possimus provident id hic minima in, beatae modi ipsa consectetur rem ratione impedit nesciunt at placeat maxime repellendus itaque. Expedita quaerat veritatis ipsa sunt nobis beatae quos, corporis, modi dolorum ab, quidem quisquam!</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div> -->\n        </div>\n    </section>\n    <section class=\"form_contaner\">\n        <input type=\"text\" name=\"chat_msg\" id=\"chat_msh\">\n        <button id=\"chat_send_btn\" class=\"send_btn\">></button>\n    </section>\n</div>\n";
+var chatRoom = "\n<div class=\"chat_room\">\n    <section class=\"chat_area\">\n        <h2 class=\"label\">Chat Room</h2>\n        <div class=\"chat_contaner\" id=\"chat_contaner\">\n            <!-- <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"me msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque aperiam porro dolore repudiandae molestiae dolor dolorum delectus possimus provident id hic minima in, beatae modi ipsa consectetur rem ratione impedit nesciunt at placeat maxime repellendus itaque. Expedita quaerat veritatis ipsa sunt nobis beatae quos, corporis, modi dolorum ab, quidem quisquam!</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div> -->\n        </div>\n    </section>\n    <section class=\"form_contaner\">\n        <input type=\"text\" name=\"chat_msg\" id=\"chat_msh\">\n        <button id=\"chat_send_btn\" class=\"send_btn\">></button>\n    </section>\n</div>\n";
 exports.chatRoom = chatRoom;
 },{}],"../node_modules/parseuri/index.js":[function(require,module,exports) {
 /**
@@ -10317,14 +10317,12 @@ var _socket = require("socket.io-client");
 
 var _Global = require("../Global");
 
-function _readOnlyError(name) { throw new TypeError("\"" + name + "\" is read-only"); }
-
 // import { send_msg } from "../Model/send_msg";
 // import { ws_con } from "../socket_connect";
 var chat_room_start = function chat_room_start() {
-  var socket = (0, _socket.io)("http://localhost:3000"); // Event Listners for sending msg
+  var socket = (0, _socket.io)("http://localhost:3000"); // Method to send msg objct to server
 
-  document.getElementById("chat_send_btn").addEventListener("click", function () {
+  var msg_request_method = function msg_request_method() {
     // Grabing Value from input field
     var msg_input = document.getElementById("chat_msh");
     var msg = msg_input.value; // Sending msg package to server
@@ -10335,8 +10333,25 @@ var chat_room_start = function chat_room_start() {
       "message": msg
     }); // emptying the input area
 
-    msg = (_readOnlyError("msg"), "");
-  }); // establishing connetion
+    msg_input.value = "";
+  }; // Receaving msg response
+
+
+  socket.on("msg_res", function (msg) {
+    console.log(msg);
+    var contaner = document.getElementById("chat_contaner");
+    var classes = ""; // Cheaking username
+
+    if (msg.userName == _Global.global.user_name) {
+      classes = "\"me msg_contaner\"";
+    }
+
+    var chat_msg = "\n            <div class=".concat(classes, ">\n                <h5 class=\"user_name\">").concat(msg.userName, "</h5>\n                <div class=\"msg\">").concat(msg.message, "</div>\n            </div>"); // Incering child elements
+
+    contaner.insertAdjacentHTML('beforeend', chat_msg);
+  }); // Event Listners for sending msg
+
+  document.getElementById("chat_send_btn").addEventListener("click", msg_request_method); // establishing connetion
 
   socket.on("connect", function () {
     socket.emit("user", {
@@ -10383,7 +10398,7 @@ var creat_room_cnt = function creat_room_cnt() {
       (0, _change_page.change_page)("center_left", _chatRoom.chatRoom, _send_msg.chat_room_start);
     } else {
       _Global.global.room.roomName = roomName;
-      _Global.global.room.roonID = Id;
+      _Global.global.room.roomID = Id;
       _Global.global.room.isPrivate = false;
       console.log(_Global.global);
       (0, _create_new_room.create_new_room)();
@@ -10584,7 +10599,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58570" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51062" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

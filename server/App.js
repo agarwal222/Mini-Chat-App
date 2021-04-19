@@ -122,7 +122,7 @@ app.post('/rooms', (req,res) => {
     console.log(rooms);
 })
 
-// socket io testing
+// socket io
 io.on("connection", (soc) => {
     console.log("connction mad with socket");
     soc.on("user",(socc) => {
@@ -131,6 +131,10 @@ io.on("connection", (soc) => {
     })
     soc.on("msg_req" ,(msg_obj) => {
         console.log(msg_obj);
+        io.in(msg_obj.roomID).emit("msg_res", {
+            "message": msg_obj.message,
+            "userName": msg_obj.userName
+        })
     })
 })
 

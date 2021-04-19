@@ -2,7 +2,7 @@ export const chatRoom = `
 <div class="chat_room">
     <section class="chat_area">
         <h2 class="label">Chat Room</h2>
-        <div class="chat_contaner">
+        <div class="chat_contaner" id="chat_contaner">
             <!-- <div class="msg_contaner">
                 <h5 class="user_name">Utkarsh</h5>
                 <div class="msg">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>

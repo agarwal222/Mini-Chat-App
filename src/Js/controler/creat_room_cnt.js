@@ -18,7 +18,7 @@ export const creat_room_cnt = () => {
             change_page("center_left", chatRoom , chat_room_start)
         }else{
             global.room.roomName = roomName
-            global.room.roonID = Id
+            global.room.roomID = Id
             global.room.isPrivate = false
             console.log(global);
             create_new_room();
