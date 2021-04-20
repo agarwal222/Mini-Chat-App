@@ -28,7 +28,7 @@ export const chat_room_start = () => {
     socket.on("msg_res", (msg) => {
         console.log(msg);
         const contaner = document.getElementById("chat_contaner")
-        let classes = ""
+        let classes = "msg_contaner"
 
         // Cheaking username
         if (msg.userName == global.user_name) {
