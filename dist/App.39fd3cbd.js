@@ -2802,7 +2802,68 @@ var process_public_room_list = /*#__PURE__*/function () {
 }();
 
 exports.process_public_room_list = process_public_room_list;
-},{"axios":"../node_modules/axios/index.js","../Global":"Js/Global.js","../controler/change_page":"Js/controler/change_page.js"}],"Js/controler/Join_room_cnt.js":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js","../Global":"Js/Global.js","../controler/change_page":"Js/controler/change_page.js"}],"Js/Model/chck_room_avalable.js":[function(require,module,exports) {
+
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.check_room_avalable = void 0;
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _Global = require("../Global");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var check_room_avalable = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee(iD) {
+    var room_check;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            _context.next = 2;
+            return _axios.default.post("http://localhost:3000/checkroom", {
+              roomID: iD,
+              userName: _Global.global.user_name
+            }).catch(function (err) {
+              return console.log(err);
+            });
+
+          case 2:
+            room_check = _context.sent;
+
+            if (room_check.status == 200) {
+              _Global.global.room.roomName = room_check.data.roomName;
+              _Global.global.room.roomID = room_check.data.roomID;
+              _Global.global.room.isPrivate = room_check.data.isPrivate;
+            } else if (room_check.status == 500) {
+              console.log("not found error");
+            }
+
+            console.log(_Global.global);
+
+          case 5:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function check_room_avalable(_x) {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+exports.check_room_avalable = check_room_avalable;
+},{"axios":"../node_modules/axios/index.js","../Global":"Js/Global.js"}],"Js/controler/Join_room_cnt.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -2816,13 +2877,20 @@ var _publicRoomsList = require("../views/publicRoomsList");
 
 var _process_public_room = require("../Model/process_public_room");
 
+var _chck_room_avalable = require("../Model/chck_room_avalable");
+
 var join_room_cnt = function join_room_cnt() {
   console.log("join room clicked");
+  document.getElementById("join_room_id").addEventListener("click", function () {
+    var idInput = document.getElementById("room_id");
+    var inputVal = idInput.value;
+    (0, _chck_room_avalable.check_room_avalable)(inputVal);
+  });
   (0, _change_page.change_page)("center_right", _publicRoomsList.publicRoomList, _process_public_room.process_public_room_list);
 };
 
 exports.join_room_cnt = join_room_cnt;
-},{"./change_page":"Js/controler/change_page.js","../views/publicRoomsList":"Js/views/publicRoomsList.js","../Model/process_public_room":"Js/Model/process_public_room.js"}],"Js/Model/create_new_room.js":[function(require,module,exports) {
+},{"./change_page":"Js/controler/change_page.js","../views/publicRoomsList":"Js/views/publicRoomsList.js","../Model/process_public_room":"Js/Model/process_public_room.js","../Model/chck_room_avalable":"Js/Model/chck_room_avalable.js"}],"Js/Model/create_new_room.js":[function(require,module,exports) {
 
 "use strict";
 
@@ -10599,7 +10667,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51062" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58294" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

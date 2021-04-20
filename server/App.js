@@ -122,6 +122,27 @@ app.post('/rooms', (req,res) => {
     console.log(rooms);
 })
 
+app.post("/checkroom" ,(req, res) => {
+    console.log(req.body);
+    rooms.find((val,ind) => {
+        if (req.body.roomID == val.roomID) {
+            console.log("ID found");
+            user_room_relation.push(
+                {
+                    "userName" : req.body.userName,
+                    "roomName" : val.roomName,
+                    "roomID" : val.roomID
+                }
+            )
+            console.log(user_room_relation);
+            res.status(200).send(val)
+        }else{
+            res.status(500).send("not found")
+            console.log("not found room");
+        }
+    })
+})
+
 // socket io
 io.on("connection", (soc) => {
     console.log("connction mad with socket");
