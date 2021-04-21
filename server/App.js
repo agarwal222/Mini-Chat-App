@@ -94,11 +94,15 @@ app.delete("/delete/:user_name", (req,res) => {
 
 // GET api for Public rooms
 app.get("/rooms/public", (req,res) => {
+    let pub_r = [];
     // checking if the room is public or not
-    const public_rooms = rooms.filter((val,ind) => {
-        return val.isPublic
+    const public_rooms = rooms.forEach((val,ind) => {
+        if(val.isPrivate == false){
+            pub_r.push(val)
+        }
     })
-    res.status(200).send(public_rooms)
+    console.log(pub_r);
+    res.status(200).send(pub_r)
 })
 
 // POST request for new room
@@ -122,6 +126,7 @@ app.post('/rooms', (req,res) => {
     console.log(rooms);
 })
 
+// POST request for checking the room if avalable or not
 app.post("/checkroom" ,(req, res) => {
     console.log(req.body);
     rooms.find((val,ind) => {

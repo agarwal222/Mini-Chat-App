@@ -15,10 +15,10 @@ export const process_public_room_list = async () => {
         const ui = document.getElementById("ul_pub_room")
         change_element("ul_pub_room","")
         pb_room_list.data.forEach(val => {
-            public_rooms.push(val.Name); // Pushing public rooms to global clint side
+            public_rooms.push(val.roomName); // Pushing public rooms to global clint side
             let li = document.createElement('li'); 
             ui.appendChild(li)
-            li.innerHTML += val.Name 
+            li.innerHTML += val.roomName 
         });
     }else{
         // else error handling 

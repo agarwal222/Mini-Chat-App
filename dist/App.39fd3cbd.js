@@ -2776,12 +2776,12 @@ var process_public_room_list = /*#__PURE__*/function () {
               ui = document.getElementById("ul_pub_room");
               (0, _change_page.change_element)("ul_pub_room", "");
               pb_room_list.data.forEach(function (val) {
-                _Global.public_rooms.push(val.Name); // Pushing public rooms to global clint side
+                _Global.public_rooms.push(val.roomName); // Pushing public rooms to global clint side
 
 
                 var li = document.createElement('li');
                 ui.appendChild(li);
-                li.innerHTML += val.Name;
+                li.innerHTML += val.roomName;
               });
             } else {
               // else error handling 
@@ -2809,7 +2809,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.chatRoom = void 0;
-var chatRoom = "\n<div class=\"chat_room\">\n    <section class=\"chat_area\">\n        <h2 class=\"label\">Chat Room</h2>\n        <div class=\"chat_contaner\" id=\"chat_contaner\">\n            <!-- <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"me msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque aperiam porro dolore repudiandae molestiae dolor dolorum delectus possimus provident id hic minima in, beatae modi ipsa consectetur rem ratione impedit nesciunt at placeat maxime repellendus itaque. Expedita quaerat veritatis ipsa sunt nobis beatae quos, corporis, modi dolorum ab, quidem quisquam!</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div> -->\n        </div>\n    </section>\n    <section class=\"form_contaner\">\n        <input type=\"text\" name=\"chat_msg\" id=\"chat_msh\">\n        <button id=\"chat_send_btn\" class=\"send_btn\">></button>\n    </section>\n</div>\n";
+var chatRoom = "\n<div class=\"chat_room\">\n    <section class=\"chat_area\">\n        <h2 class=\"label\">Chat Room </h2>\n        <div class=\"chat_contaner\" id=\"chat_contaner\">\n            <!-- <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"me msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque aperiam porro dolore repudiandae molestiae dolor dolorum delectus possimus provident id hic minima in, beatae modi ipsa consectetur rem ratione impedit nesciunt at placeat maxime repellendus itaque. Expedita quaerat veritatis ipsa sunt nobis beatae quos, corporis, modi dolorum ab, quidem quisquam!</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div> -->\n        </div>\n    </section>\n    <section class=\"form_contaner\">\n        <input type=\"text\" name=\"chat_msg\" id=\"chat_msh\">\n        <button id=\"chat_send_btn\" class=\"send_btn\">></button>\n    </section>\n</div>\n";
 exports.chatRoom = chatRoom;
 },{}],"../node_modules/parseuri/index.js":[function(require,module,exports) {
 /**
@@ -10259,7 +10259,9 @@ var chat_room_start = function chat_room_start() {
       "message": msg
     }); // emptying the input area
 
-    msg_input.value = "";
+    msg_input.value = ""; // Scroll Top 
+    // const msg_cont = document.getElementById("chat_contaner")
+    // msg_cont.scrollHeight = 3000
   }; // Receaving msg response
 
 
@@ -10268,10 +10270,7 @@ var chat_room_start = function chat_room_start() {
     var contaner = document.getElementById("chat_contaner");
     var classes = "msg_contaner"; // Cheaking username
 
-    if (msg.userName == _Global.global.user_name) {
-      classes = "\"me msg_contaner\"";
-    }
-
+    msg.userName == _Global.global.user_name ? classes = "\"me msg_contaner\"" : classes = "msg_contaner";
     var chat_msg = "\n            <div class=".concat(classes, ">\n                <h5 class=\"user_name\">").concat(msg.userName, "</h5>\n                <div class=\"msg\">").concat(msg.message, "</div>\n            </div>"); // Incering child elements
 
     contaner.insertAdjacentHTML('beforeend', chat_msg);
@@ -10674,7 +10673,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58294" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59436" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

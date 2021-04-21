@@ -22,6 +22,10 @@ export const chat_room_start = () => {
 
         // emptying the input area
         msg_input.value = "";
+
+        // Scroll Top 
+        // const msg_cont = document.getElementById("chat_contaner")
+        // msg_cont.scrollHeight = 3000
     }
 
     // Receaving msg response
@@ -31,9 +35,7 @@ export const chat_room_start = () => {
         let classes = "msg_contaner"
 
         // Cheaking username
-        if (msg.userName == global.user_name) {
-            classes = `"me msg_contaner"`;
-        }
+        msg.userName == global.user_name ? classes = `"me msg_contaner"` : classes = "msg_contaner"
 
         const chat_msg = `
             <div class=${classes}>
