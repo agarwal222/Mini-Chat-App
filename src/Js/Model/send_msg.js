@@ -22,10 +22,6 @@ export const chat_room_start = () => {
 
         // emptying the input area
         msg_input.value = "";
-
-        // Scroll Top 
-        // const msg_cont = document.getElementById("chat_contaner")
-        // msg_cont.scrollHeight = 3000
     }
 
     // Receaving msg response
@@ -45,6 +41,12 @@ export const chat_room_start = () => {
 
         // Incering child elements
         contaner.insertAdjacentHTML('beforeend', chat_msg);
+
+        // Scrolling to the last msg 
+        let ele = document.getElementsByClassName("msg_contaner");
+        let last_ele = ele.length-1;
+        ele[last_ele].scrollIntoView(true);
+        // console.log(ele[last_ele]);
     })
 
 

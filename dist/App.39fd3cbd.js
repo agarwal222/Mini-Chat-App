@@ -10259,9 +10259,7 @@ var chat_room_start = function chat_room_start() {
       "message": msg
     }); // emptying the input area
 
-    msg_input.value = ""; // Scroll Top 
-    // const msg_cont = document.getElementById("chat_contaner")
-    // msg_cont.scrollHeight = 3000
+    msg_input.value = "";
   }; // Receaving msg response
 
 
@@ -10273,7 +10271,11 @@ var chat_room_start = function chat_room_start() {
     msg.userName == _Global.global.user_name ? classes = "\"me msg_contaner\"" : classes = "msg_contaner";
     var chat_msg = "\n            <div class=".concat(classes, ">\n                <h5 class=\"user_name\">").concat(msg.userName, "</h5>\n                <div class=\"msg\">").concat(msg.message, "</div>\n            </div>"); // Incering child elements
 
-    contaner.insertAdjacentHTML('beforeend', chat_msg);
+    contaner.insertAdjacentHTML('beforeend', chat_msg); // Scrolling to the last msg 
+
+    var ele = document.getElementsByClassName("msg_contaner");
+    var last_ele = ele.length - 1;
+    ele[last_ele].scrollIntoView(true); // console.log(ele[last_ele]);
   }); // Event Listners for sending msg
 
   document.getElementById("chat_send_btn").addEventListener("click", msg_request_method); // establishing connetion
@@ -10673,7 +10675,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59436" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54705" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
