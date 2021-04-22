@@ -38,6 +38,9 @@ const rooms = [
     //     "roomID" : "ID of the room",
     //     "isPrivate" : true or false (booion value)
     // }
+    { roomName: 'as', roomID: 1619051510863, isPrivate: false },
+    { roomName: 'asadf', roomID: 1619051510863, isPrivate: false },
+    { roomName: 'asdvvwvefc', roomID: 1619051510863, isPrivate: false }
 ];
 
 // user_room_relation data structure

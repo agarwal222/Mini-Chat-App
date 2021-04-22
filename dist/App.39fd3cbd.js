@@ -2777,11 +2777,15 @@ var process_public_room_list = /*#__PURE__*/function () {
               (0, _change_page.change_element)("ul_pub_room", "");
               pb_room_list.data.forEach(function (val) {
                 _Global.public_rooms.push(val.roomName); // Pushing public rooms to global clint side
+                // Old way to display the list of public rooms
+                // let li = document.createElement('li'); 
+                // ui.appendChild(li)
+                // li.innerHTML += val.roomName 
+                // Desplaying public room list (new way) 
 
 
-                var li = document.createElement('li');
-                ui.appendChild(li);
-                li.innerHTML += val.roomName;
+                var element = "<li>".concat(val.roomName, "</li>");
+                ui.insertAdjacentHTML('beforeend', element);
               });
             } else {
               // else error handling 
