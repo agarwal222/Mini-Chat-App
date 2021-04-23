@@ -18,6 +18,7 @@ export const check = async () => {
 
     // Making the POST API call
     if(global.user_name && global.email){
+
         const promis = await axios.post("http://localhost:3000/users",{
             user_name: global.user_name,
             email : global.email

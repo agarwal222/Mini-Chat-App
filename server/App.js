@@ -74,13 +74,21 @@ app.post('/users', (req,res) => {
 })
 
 // Delete request for the user
-app.delete("/delete/:user_name", (req,res) => {
+app.get("/delete/:user_name", (req,res) => {
+
+    let us_del;
+    console.log("deleting user .........");
 
     // deleating the user once found
     const delet = users.find((val,ind) => {
         if(req.params.user_name == val.user_name){
-            // console.log(ind); // index of the existing user
             users.splice(ind,1); // deleating user feom array
+            const u_r_r_i = user_room_relation.find((vall,indd) => {
+                if(vall.userName == val.user_name){
+                    console.log(indd);
+                    user_room_relation.splice(ind,1); // Deleting from relation array
+                }
+            })
             res.status(200).send(users);
             us_del = true
         }
@@ -167,6 +175,9 @@ io.on("connection", (soc) => {
 
 
 // Server Listning
-server.listen(3000 , () => (
-    console.log("Server running")
-))
+server.listen(3000 , () => {
+    console.log("SERVER STARTED");
+    console.log(users);
+    console.log(rooms);
+    console.log(user_room_relation);
+})
