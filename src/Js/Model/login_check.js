@@ -21,8 +21,15 @@ export const check = async () => {
         const promis = await axios.post("http://localhost:3000/users",{
             user_name: global.user_name,
             email : global.email
-        }).catch( err => ( console.log(err)))
-        change_page("center_left",CreatOrJoin,creat_or_join_room)
+        })
+        .then((res) => {
+            change_page("center_left",CreatOrJoin,creat_or_join_room)
+        })
+        .catch( err => {
+            change_page("center_left",LoginPage,login_load);
+            document.getElementById("err").innerHTML = "User Name already exist";
+        })
+        
     }else{
         change_page("center_left",LoginPage,login_load);
         document.getElementById("err").innerHTML = "Can't be empty";

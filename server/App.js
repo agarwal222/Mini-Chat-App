@@ -38,9 +38,6 @@ const rooms = [
     //     "roomID" : "ID of the room",
     //     "isPrivate" : true or false (booion value)
     // }
-    { roomName: 'as', roomID: 1619051510863, isPrivate: false },
-    { roomName: 'asadf', roomID: 1619051510863, isPrivate: false },
-    { roomName: 'asdvvwvefc', roomID: 1619051510863, isPrivate: false }
 ];
 
 // user_room_relation data structure
@@ -63,7 +60,7 @@ app.post('/users', (req,res) => {
     const find = users.find((val,ind) => {
         if(req.body.user_name == val.user_name){
             console.log(ind); // index of the existing user
-            res.status(500).send("User already exist");
+            res.status(400).send("User already exist");
             us_fnd = true
         }
     });
@@ -132,7 +129,7 @@ app.post('/rooms', (req,res) => {
 // POST request for checking the room if avalable or not
 app.post("/checkroom" ,(req, res) => {
     console.log(req.body);
-    rooms.find((val,ind) => {
+    const find = rooms.find((val,ind) => {
         if (req.body.roomID == val.roomID) {
             console.log("ID found");
             user_room_relation.push(
@@ -144,11 +141,12 @@ app.post("/checkroom" ,(req, res) => {
             )
             console.log(user_room_relation);
             res.status(200).send(val)
-        }else{
-            res.status(500).send("not found")
-            console.log("not found room");
         }
     })
+    if(!find){
+        res.status(500).send("not found")
+        console.log("not found room");
+    }
 })
 
 // socket io

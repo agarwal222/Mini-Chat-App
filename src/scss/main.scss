@@ -66,6 +66,8 @@ body{
         li{
             margin: 0.1em 0.5em;
             display: inline-block;
+            cursor: pointer;
+            user-select: none;
         }
 
     }

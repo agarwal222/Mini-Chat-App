@@ -2732,81 +2732,7 @@ var _Global = require("../Global");
 
 var publicRoomList = "\n<h1>Public Rooms</h1>\n<section class=\"public_rooms_list\">\n    <!-- <p>List of Public rooms</p> -->\n    <ul id=\"ul_pub_room\">\n        \n    </ul>\n</section>\n";
 exports.publicRoomList = publicRoomList;
-},{"../Global":"Js/Global.js"}],"Js/Model/process_public_room.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.process_public_room_list = void 0;
-
-var _axios = _interopRequireDefault(require("axios"));
-
-var _Global = require("../Global");
-
-var _change_page = require("../controler/change_page");
-
-function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
-
-function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
-
-function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
-
-var process_public_room_list = /*#__PURE__*/function () {
-  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-    var pb_room_list, ui;
-    return regeneratorRuntime.wrap(function _callee$(_context) {
-      while (1) {
-        switch (_context.prev = _context.next) {
-          case 0:
-            // the loading screan before loading public room list
-            (0, _change_page.change_element)("ul_pub_room", "LOADING"); // GET request to public rooms api
-
-            _context.next = 3;
-            return _axios.default.get("http://localhost:3000/rooms/public").catch(function (err) {
-              return console.log(err.data);
-            });
-
-          case 3:
-            pb_room_list = _context.sent;
-
-            if (pb_room_list.data.length !== 0) {
-              // checking data length
-              // Creating list elements if leangth is more then 0
-              ui = document.getElementById("ul_pub_room");
-              (0, _change_page.change_element)("ul_pub_room", "");
-              pb_room_list.data.forEach(function (val) {
-                _Global.public_rooms.push(val.roomName); // Pushing public rooms to global clint side
-                // Old way to display the list of public rooms
-                // let li = document.createElement('li'); 
-                // ui.appendChild(li)
-                // li.innerHTML += val.roomName 
-                // Desplaying public room list (new way) 
-
-
-                var element = "<li>".concat(val.roomName, "</li>");
-                ui.insertAdjacentHTML('beforeend', element);
-              });
-            } else {
-              // else error handling 
-              (0, _change_page.change_element)("ul_pub_room", "Not Found");
-            }
-
-          case 5:
-          case "end":
-            return _context.stop();
-        }
-      }
-    }, _callee);
-  }));
-
-  return function process_public_room_list() {
-    return _ref.apply(this, arguments);
-  };
-}();
-
-exports.process_public_room_list = process_public_room_list;
-},{"axios":"../node_modules/axios/index.js","../Global":"Js/Global.js","../controler/change_page":"Js/controler/change_page.js"}],"Js/views/chatRoom.js":[function(require,module,exports) {
+},{"../Global":"Js/Global.js"}],"Js/views/chatRoom.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10363,7 +10289,105 @@ var check_room_avalable = /*#__PURE__*/function () {
 }();
 
 exports.check_room_avalable = check_room_avalable;
-},{"axios":"../node_modules/axios/index.js","../Global":"Js/Global.js","../controler/change_page":"Js/controler/change_page.js","../views/chatRoom":"Js/views/chatRoom.js","../Model/send_msg":"Js/Model/send_msg.js"}],"Js/controler/Join_room_cnt.js":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js","../Global":"Js/Global.js","../controler/change_page":"Js/controler/change_page.js","../views/chatRoom":"Js/views/chatRoom.js","../Model/send_msg":"Js/Model/send_msg.js"}],"Js/Model/join_public_room.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.joinPublicRoom = void 0;
+
+var _chck_room_avalable = require("./chck_room_avalable");
+
+var joinPublicRoom = function joinPublicRoom() {
+  var items = document.querySelectorAll("#ul_pub_room li");
+  items.forEach(function (val, ind, itm) {
+    val.onclick = function () {
+      var roomID = parseInt(val.id);
+      console.log(val);
+      (0, _chck_room_avalable.check_room_avalable)(roomID);
+    };
+  });
+};
+
+exports.joinPublicRoom = joinPublicRoom;
+},{"./chck_room_avalable":"Js/Model/chck_room_avalable.js"}],"Js/Model/process_public_room.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.process_public_room_list = void 0;
+
+var _axios = _interopRequireDefault(require("axios"));
+
+var _Global = require("../Global");
+
+var _change_page = require("../controler/change_page");
+
+var _join_public_room = require("./join_public_room");
+
+function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
+
+function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
+
+function _asyncToGenerator(fn) { return function () { var self = this, args = arguments; return new Promise(function (resolve, reject) { var gen = fn.apply(self, args); function _next(value) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "next", value); } function _throw(err) { asyncGeneratorStep(gen, resolve, reject, _next, _throw, "throw", err); } _next(undefined); }); }; }
+
+var process_public_room_list = /*#__PURE__*/function () {
+  var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
+    var pb_room_list, ui;
+    return regeneratorRuntime.wrap(function _callee$(_context) {
+      while (1) {
+        switch (_context.prev = _context.next) {
+          case 0:
+            // the loading screan before loading public room list
+            (0, _change_page.change_element)("ul_pub_room", "LOADING"); // GET request to public rooms api
+
+            _context.next = 3;
+            return _axios.default.get("http://localhost:3000/rooms/public").catch(function (err) {
+              return console.log(err.data);
+            });
+
+          case 3:
+            pb_room_list = _context.sent;
+
+            if (pb_room_list.data.length !== 0) {
+              // Creating list elements if leangth is more then 0
+              ui = document.getElementById("ul_pub_room");
+              (0, _change_page.change_element)("ul_pub_room", "");
+              pb_room_list.data.forEach(function (val) {
+                _Global.public_rooms.push(val); // Pushing public rooms to global clint side
+                // Old way to display the list of public rooms
+                // let li = document.createElement('li'); 
+                // ui.appendChild(li)
+                // li.innerHTML += val.roomName 
+                // Desplaying public room list (new way) 
+
+
+                var element = "<li id=".concat(val.roomID, ">").concat(val.roomName, "</li>");
+                ui.insertAdjacentHTML('beforeend', element);
+                (0, _join_public_room.joinPublicRoom)();
+              });
+            } else {
+              // else error handling 
+              (0, _change_page.change_element)("ul_pub_room", "Not Found");
+            }
+
+          case 5:
+          case "end":
+            return _context.stop();
+        }
+      }
+    }, _callee);
+  }));
+
+  return function process_public_room_list() {
+    return _ref.apply(this, arguments);
+  };
+}();
+
+exports.process_public_room_list = process_public_room_list;
+},{"axios":"../node_modules/axios/index.js","../Global":"Js/Global.js","../controler/change_page":"Js/controler/change_page.js","./join_public_room":"Js/Model/join_public_room.js"}],"Js/controler/Join_room_cnt.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10586,7 +10610,7 @@ var check = /*#__PURE__*/function () {
             document.getElementById("center_left").innerHTML = "Loading..."; // Making the POST API call
 
             if (!(_Global.global.user_name && _Global.global.email)) {
-              _context.next = 10;
+              _context.next = 9;
               break;
             }
 
@@ -10594,21 +10618,23 @@ var check = /*#__PURE__*/function () {
             return _axios.default.post("http://localhost:3000/users", {
               user_name: _Global.global.user_name,
               email: _Global.global.email
+            }).then(function (res) {
+              (0, _change_page.change_page)("center_left", _createOrJoin.CreatOrJoin, _create_or_join.creat_or_join_room);
             }).catch(function (err) {
-              return console.log(err);
+              (0, _change_page.change_page)("center_left", _loginPage.LoginPage, _login_load.login_load);
+              document.getElementById("err").innerHTML = "User Name already exist";
             });
 
           case 6:
             promis = _context.sent;
-            (0, _change_page.change_page)("center_left", _createOrJoin.CreatOrJoin, _create_or_join.creat_or_join_room);
-            _context.next = 12;
+            _context.next = 11;
             break;
 
-          case 10:
+          case 9:
             (0, _change_page.change_page)("center_left", _loginPage.LoginPage, _login_load.login_load);
             document.getElementById("err").innerHTML = "Can't be empty";
 
-          case 12:
+          case 11:
           case "end":
             return _context.stop();
         }
@@ -10679,7 +10705,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "54705" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59580" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
