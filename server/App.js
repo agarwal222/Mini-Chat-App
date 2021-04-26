@@ -58,7 +58,7 @@ app.post('/users', (req,res) => {
 
     // Finding the user if already exist
     const find = users.find((val,ind) => {
-        if(req.body.user_name == val.user_name){
+        if(req.body.email == val.email){
             console.log(ind); // index of the existing user
             res.status(400).send("User already exist");
             us_fnd = true

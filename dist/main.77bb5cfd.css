@@ -49,6 +49,11 @@ input {
 .login_pannel .form_contaner .login_btn {
   float: right;
 }
+.login_pannel .form_contaner span {
+  margin-top: 0.05em;
+  float: right;
+  cursor: pointer;
+}
 .login_pannel .form_contaner label {
   font-size: 1.5em;
   font-weight: 500;
@@ -284,6 +289,8 @@ input {
 .chat_room .form_contaner button {
   margin: 0;
   padding: 0.4em 0.8em;
+  display: grid;
+  place-items: center;
 }
 
 body {

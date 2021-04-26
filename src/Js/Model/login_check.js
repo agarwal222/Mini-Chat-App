@@ -1,10 +1,11 @@
 import axios from 'axios';
 import {CreatOrJoin} from "../views/createOrJoin";
-import {change_page} from "../controler/change_page";
+import {change_element, change_page} from "../controler/change_page";
 import { global } from "../Global";
 import { creat_or_join_room } from "../controler/create_or_join";
 import {LoginPage} from "../views/loginPage";
 import { login_load } from "../controler/login_load";
+import { loder } from "../views/Icons/loader";
 
 
 export const check = async () => {
@@ -14,7 +15,8 @@ export const check = async () => {
     global.email = document.getElementById("email").value
 
     // the loading screan before call is done
-    document.getElementById("center_left").innerHTML = "Loading...";
+    // document.getElementById("center_left").innerHTML = "Loading...";
+    change_element("center_left", loder)
 
     // Making the POST API call
     if(global.user_name && global.email){
@@ -28,7 +30,7 @@ export const check = async () => {
         })
         .catch( err => {
             change_page("center_left",LoginPage,login_load);
-            document.getElementById("err").innerHTML = "User Name already exist";
+            document.getElementById("err").innerHTML = "User already exist";
         })
         
     }else{

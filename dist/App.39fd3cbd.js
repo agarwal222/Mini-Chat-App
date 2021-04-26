@@ -2739,7 +2739,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.chatRoom = void 0;
-var chatRoom = "\n<div class=\"chat_room\">\n    <section class=\"chat_area\">\n        <h2 class=\"label\">Chat Room </h2>\n        <div class=\"chat_contaner\" id=\"chat_contaner\">\n            <!-- <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"me msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque aperiam porro dolore repudiandae molestiae dolor dolorum delectus possimus provident id hic minima in, beatae modi ipsa consectetur rem ratione impedit nesciunt at placeat maxime repellendus itaque. Expedita quaerat veritatis ipsa sunt nobis beatae quos, corporis, modi dolorum ab, quidem quisquam!</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div> -->\n        </div>\n    </section>\n    <section class=\"form_contaner\">\n        <input type=\"text\" name=\"chat_msg\" id=\"chat_msh\">\n        <button id=\"chat_send_btn\" class=\"send_btn\">></button>\n    </section>\n</div>\n";
+var chatRoom = "\n<div class=\"chat_room\">\n    <section class=\"chat_area\">\n        <h2 class=\"label\">Chat Room </h2>\n        <div class=\"chat_contaner\" id=\"chat_contaner\">\n            <!-- <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"me msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque aperiam porro dolore repudiandae molestiae dolor dolorum delectus possimus provident id hic minima in, beatae modi ipsa consectetur rem ratione impedit nesciunt at placeat maxime repellendus itaque. Expedita quaerat veritatis ipsa sunt nobis beatae quos, corporis, modi dolorum ab, quidem quisquam!</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div> -->\n        </div>\n    </section>\n    <section class=\"form_contaner\">\n        <input type=\"text\" name=\"chat_msg\" id=\"chat_msh\">\n        <button id=\"chat_send_btn\" class=\"send_btn\"><span class=\"material-icons\">\n        send\n        </span></button>\n    </section>\n</div>\n";
 exports.chatRoom = chatRoom;
 },{}],"../node_modules/parseuri/index.js":[function(require,module,exports) {
 /**
@@ -10311,7 +10311,16 @@ var joinPublicRoom = function joinPublicRoom() {
 };
 
 exports.joinPublicRoom = joinPublicRoom;
-},{"./chck_room_avalable":"Js/Model/chck_room_avalable.js"}],"Js/Model/process_public_room.js":[function(require,module,exports) {
+},{"./chck_room_avalable":"Js/Model/chck_room_avalable.js"}],"Js/views/Icons/loader.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.loder = void 0;
+var loder = "\n<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<svg xmlns=\"http://www.w3.org/2000/svg\" xmlns:xlink=\"http://www.w3.org/1999/xlink\" style=\"margin: auto; background: rgba(241, 242, 243, 0); display: block; shape-rendering: auto;\" width=\"200px\" height=\"200px\" viewBox=\"0 0 100 100\" preserveAspectRatio=\"xMidYMid\">\n<circle cx=\"50\" cy=\"50\" fill=\"none\" stroke=\"#8585c7\" stroke-width=\"10\" r=\"35\" stroke-dasharray=\"164.93361431346415 56.97787143782138\">\n  <animateTransform attributeName=\"transform\" type=\"rotate\" repeatCount=\"indefinite\" dur=\"1s\" values=\"0 50 50;360 50 50\" keyTimes=\"0;1\"></animateTransform>\n</circle>\n</svg>";
+exports.loder = loder;
+},{}],"Js/Model/process_public_room.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10326,6 +10335,8 @@ var _Global = require("../Global");
 var _change_page = require("../controler/change_page");
 
 var _join_public_room = require("./join_public_room");
+
+var _loader = require("../views/Icons/loader");
 
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
@@ -10354,7 +10365,7 @@ var process_public_room_list = /*#__PURE__*/function () {
             if (pb_room_list.data.length !== 0) {
               // Creating list elements if leangth is more then 0
               ui = document.getElementById("ul_pub_room");
-              (0, _change_page.change_element)("ul_pub_room", "");
+              (0, _change_page.change_element)("ul_pub_room", _loader.loder);
               pb_room_list.data.forEach(function (val) {
                 _Global.public_rooms.push(val); // Pushing public rooms to global clint side
                 // Old way to display the list of public rooms
@@ -10387,7 +10398,7 @@ var process_public_room_list = /*#__PURE__*/function () {
 }();
 
 exports.process_public_room_list = process_public_room_list;
-},{"axios":"../node_modules/axios/index.js","../Global":"Js/Global.js","../controler/change_page":"Js/controler/change_page.js","./join_public_room":"Js/Model/join_public_room.js"}],"Js/controler/Join_room_cnt.js":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js","../Global":"Js/Global.js","../controler/change_page":"Js/controler/change_page.js","./join_public_room":"Js/Model/join_public_room.js","../views/Icons/loader":"Js/views/Icons/loader.js"}],"Js/controler/Join_room_cnt.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10403,18 +10414,21 @@ var _process_public_room = require("../Model/process_public_room");
 
 var _chck_room_avalable = require("../Model/chck_room_avalable");
 
+var _loader = require("../views/Icons/loader");
+
 var join_room_cnt = function join_room_cnt() {
   console.log("join room clicked");
   document.getElementById("join_room_id").addEventListener("click", function () {
     var idInput = document.getElementById("room_id");
     var inputVal = idInput.value;
+    (0, _change_page.change_element)("center_left", _loader.loder);
     (0, _chck_room_avalable.check_room_avalable)(inputVal);
   });
   (0, _change_page.change_page)("center_right", _publicRoomsList.publicRoomList, _process_public_room.process_public_room_list);
 };
 
 exports.join_room_cnt = join_room_cnt;
-},{"./change_page":"Js/controler/change_page.js","../views/publicRoomsList":"Js/views/publicRoomsList.js","../Model/process_public_room":"Js/Model/process_public_room.js","../Model/chck_room_avalable":"Js/Model/chck_room_avalable.js"}],"Js/Model/create_new_room.js":[function(require,module,exports) {
+},{"./change_page":"Js/controler/change_page.js","../views/publicRoomsList":"Js/views/publicRoomsList.js","../Model/process_public_room":"Js/Model/process_public_room.js","../Model/chck_room_avalable":"Js/Model/chck_room_avalable.js","../views/Icons/loader":"Js/views/Icons/loader.js"}],"Js/Model/create_new_room.js":[function(require,module,exports) {
 
 "use strict";
 
@@ -10487,10 +10501,13 @@ var _chatRoom = require("../views/chatRoom");
 
 var _send_msg = require("../Model/send_msg");
 
+var _loader = require("../views/Icons/loader");
+
 var creat_room_cnt = function creat_room_cnt() {
   document.getElementById("creat_room").addEventListener("click", function () {
     var roomName = document.getElementById("room_name").value;
     var isPrivate = document.getElementById("private_room");
+    (0, _change_page.change_element)("center_left", _loader.loder);
     var Id = Date.now();
 
     if (isPrivate.checked) {
@@ -10512,7 +10529,7 @@ var creat_room_cnt = function creat_room_cnt() {
 };
 
 exports.creat_room_cnt = creat_room_cnt;
-},{"../Global":"Js/Global.js","../Model/create_new_room":"Js/Model/create_new_room.js","./change_page":"Js/controler/change_page.js","../views/chatRoom":"Js/views/chatRoom.js","../Model/send_msg":"Js/Model/send_msg.js"}],"Js/views/creatRoom.js":[function(require,module,exports) {
+},{"../Global":"Js/Global.js","../Model/create_new_room":"Js/Model/create_new_room.js","./change_page":"Js/controler/change_page.js","../views/chatRoom":"Js/views/chatRoom.js","../Model/send_msg":"Js/Model/send_msg.js","../views/Icons/loader":"Js/views/Icons/loader.js"}],"Js/views/creatRoom.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10565,7 +10582,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.LoginPage = void 0;
-var LoginPage = "\n<div class=\"login_pannel\">\n    <h1>Log In</h1>\n    <section class=\"form_contaner\">\n        <label for=\"email\" class=\"email\">E-Mail</label><br />\n        <input type=\"email\" name=\"email\" class=\"email_input\" id=\"email\"><br />\n        <label for=\"display_name\" class=\"display_name\">Display Name</label><br />\n        <input type=\"text\" name=\"display_name\" class=\"siaplay_name_input\" id=\"display_name\"><br />\n        <button type=\"submit\" id=\"btn\" class=\"login_btn\">Next</button>\n    </section>\n    <spam id=\"err\"></spam>\n</div>\n";
+var LoginPage = "\n<div class=\"login_pannel\">\n    <h1>Log In</h1>\n    <section class=\"form_contaner\">\n        <label for=\"email\" class=\"email\">E-Mail</label><span class=\"material-icons\">info</span><br />\n        <input type=\"email\" name=\"email\" class=\"email_input\" id=\"email\"><br />\n        <label for=\"display_name\" class=\"display_name\">Display Name</label><span class=\"material-icons\">info</span><br />\n        <input type=\"text\" name=\"display_name\" class=\"siaplay_name_input\" id=\"display_name\"><br />\n        <button type=\"submit\" id=\"btn\" class=\"login_btn\">Next</button>\n    </section>\n    <spam id=\"err\"></spam>\n</div>\n";
 exports.LoginPage = LoginPage;
 },{}],"Js/Model/login_check.js":[function(require,module,exports) {
 
@@ -10590,6 +10607,8 @@ var _loginPage = require("../views/loginPage");
 
 var _login_load = require("../controler/login_load");
 
+var _loader = require("../views/Icons/loader");
+
 function _interopRequireDefault(obj) { return obj && obj.__esModule ? obj : { default: obj }; }
 
 function asyncGeneratorStep(gen, resolve, reject, _next, _throw, key, arg) { try { var info = gen[key](arg); var value = info.value; } catch (error) { reject(error); return; } if (info.done) { resolve(value); } else { Promise.resolve(value).then(_next, _throw); } }
@@ -10606,8 +10625,9 @@ var check = /*#__PURE__*/function () {
             // getting the data page 
             _Global.global.user_name = document.getElementById("display_name").value;
             _Global.global.email = document.getElementById("email").value; // the loading screan before call is done
+            // document.getElementById("center_left").innerHTML = "Loading...";
 
-            document.getElementById("center_left").innerHTML = "Loading..."; // Making the POST API call
+            (0, _change_page.change_element)("center_left", _loader.loder); // Making the POST API call
 
             if (!(_Global.global.user_name && _Global.global.email)) {
               _context.next = 9;
@@ -10622,7 +10642,7 @@ var check = /*#__PURE__*/function () {
               (0, _change_page.change_page)("center_left", _createOrJoin.CreatOrJoin, _create_or_join.creat_or_join_room);
             }).catch(function (err) {
               (0, _change_page.change_page)("center_left", _loginPage.LoginPage, _login_load.login_load);
-              document.getElementById("err").innerHTML = "User Name already exist";
+              document.getElementById("err").innerHTML = "User already exist";
             });
 
           case 6:
@@ -10648,7 +10668,7 @@ var check = /*#__PURE__*/function () {
 }();
 
 exports.check = check;
-},{"axios":"../node_modules/axios/index.js","../views/createOrJoin":"Js/views/createOrJoin.js","../controler/change_page":"Js/controler/change_page.js","../Global":"Js/Global.js","../controler/create_or_join":"Js/controler/create_or_join.js","../views/loginPage":"Js/views/loginPage.js","../controler/login_load":"Js/controler/login_load.js"}],"Js/controler/login_load.js":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js","../views/createOrJoin":"Js/views/createOrJoin.js","../controler/change_page":"Js/controler/change_page.js","../Global":"Js/Global.js","../controler/create_or_join":"Js/controler/create_or_join.js","../views/loginPage":"Js/views/loginPage.js","../controler/login_load":"Js/controler/login_load.js","../views/Icons/loader":"Js/views/Icons/loader.js"}],"Js/controler/login_load.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10743,7 +10763,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "59580" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57248" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

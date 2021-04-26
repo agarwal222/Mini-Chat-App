@@ -24,6 +24,12 @@
             float: right;
         }
 
+        span{
+            margin-top: 0.05em;
+            float: right;
+            cursor: pointer;
+        }
+
         label{
             font-size: fs.$base_font;
             font-weight: 500;

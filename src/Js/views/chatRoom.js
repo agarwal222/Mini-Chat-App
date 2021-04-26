@@ -27,7 +27,9 @@ export const chatRoom = `
     </section>
     <section class="form_contaner">
         <input type="text" name="chat_msg" id="chat_msh">
-        <button id="chat_send_btn" class="send_btn">></button>
+        <button id="chat_send_btn" class="send_btn"><span class="material-icons">
+        send
+        </span></button>
     </section>
 </div>
 `
