@@ -12,6 +12,10 @@
         width: calc(100% - 60px);
         justify-self: center;
 
+        ::-webkit-scrollbar{
+            display: none;
+        }
+
         .label{
             font-size: fs.$base_font;
             font-weight: 500;
@@ -43,6 +47,7 @@
                 border-radius: 10px;
                 padding: 0.2em 1em;
                 margin: 0.5em;
+                word-break: break-all;
             }
         }
     }

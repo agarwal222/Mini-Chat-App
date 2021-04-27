@@ -12,12 +12,13 @@ export const chat_room_start = () => {
         // Grabing Value from input field
         const msg_input = document.getElementById("chat_msh")
         let msg = msg_input.value
+        let messg = escape(msg.toString());
 
         // Sending msg package to server
         socket.emit("msg_req" , {
             "userName": global.user_name,
             "roomID" : global.room.roomID,
-            "message" : msg
+            "message" : messg
         });
 
         // emptying the input area

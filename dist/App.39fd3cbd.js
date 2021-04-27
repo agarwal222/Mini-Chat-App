@@ -10181,12 +10181,13 @@ var chat_room_start = function chat_room_start() {
   var msg_request_method = function msg_request_method() {
     // Grabing Value from input field
     var msg_input = document.getElementById("chat_msh");
-    var msg = msg_input.value; // Sending msg package to server
+    var msg = msg_input.value;
+    var messg = escape(msg.toString()); // Sending msg package to server
 
     socket.emit("msg_req", {
       "userName": _Global.global.user_name,
       "roomID": _Global.global.room.roomID,
-      "message": msg
+      "message": messg
     }); // emptying the input area
 
     msg_input.value = "";
@@ -10763,7 +10764,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57248" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57424" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
