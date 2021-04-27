@@ -10181,8 +10181,16 @@ var chat_room_start = function chat_room_start() {
   var msg_request_method = function msg_request_method() {
     // Grabing Value from input field
     var msg_input = document.getElementById("chat_msh");
-    var msg = msg_input.value;
-    var messg = escape(msg.toString()); // Sending msg package to server
+    var msg = msg_input.value; // message parser so that no HTML or JS code can be injected in the chat to prevent XSS
+
+    function escapeRegExp(string) {
+      var p1 = string.replace(/</gi, '&lt');
+      var p2 = p1.replace(/>/gi, '&gt');
+      var p3 = p2.replace(/[.*+?^${}()|[\]\\]/gi, '\\$&');
+      return p3;
+    }
+
+    var messg = escapeRegExp(msg.toString()); // Sending msg package to server
 
     socket.emit("msg_req", {
       "userName": _Global.global.user_name,
@@ -10764,7 +10772,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "57424" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60548" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

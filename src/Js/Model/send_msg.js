@@ -12,7 +12,16 @@ export const chat_room_start = () => {
         // Grabing Value from input field
         const msg_input = document.getElementById("chat_msh")
         let msg = msg_input.value
-        let messg = escape(msg.toString());
+
+        // message parser so that no HTML or JS code can be injected in the chat to prevent XSS
+        function escapeRegExp(string) {
+            let p1 = string.replace(/</gi, '&lt');
+            let p2 = p1.replace(/>/gi, '&gt');
+            let p3 = p2.replace(/[.*+?^${}()|[\]\\]/gi, '\\$&')
+            return p3
+        }
+
+        let messg = escapeRegExp(msg.toString());
 
         // Sending msg package to server
         socket.emit("msg_req" , {
