@@ -10193,6 +10193,7 @@ var chat_room_start = function chat_room_start() {
     var messg = escapeRegExp(msg.toString()); // Sending msg package to server
 
     socket.emit("msg_req", {
+      "email": _Global.global.email,
       "userName": _Global.global.user_name,
       "roomID": _Global.global.room.roomID,
       "message": messg
@@ -10207,7 +10208,7 @@ var chat_room_start = function chat_room_start() {
     var contaner = document.getElementById("chat_contaner");
     var classes = "msg_contaner"; // Cheaking username
 
-    msg.userName == _Global.global.user_name ? classes = "\"me msg_contaner\"" : classes = "msg_contaner";
+    msg.email == _Global.global.email ? classes = "\"me msg_contaner\"" : classes = "msg_contaner";
     var chat_msg = "\n            <div class=".concat(classes, ">\n                <h5 class=\"user_name\">").concat(msg.userName, "</h5>\n                <div class=\"msg\">").concat(msg.message, "</div>\n            </div>"); // Incering child elements
 
     contaner.insertAdjacentHTML('beforeend', chat_msg); // Scrolling to the last msg 
@@ -10361,7 +10362,8 @@ var process_public_room_list = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             // the loading screan before loading public room list
-            (0, _change_page.change_element)("ul_pub_room", "LOADING"); // GET request to public rooms api
+            // change_element("ul_pub_room","LOADING")   
+            (0, _change_page.change_element)("ul_pub_room", _loader.loder); // GET request to public rooms api
 
             _context.next = 3;
             return _axios.default.get("http://localhost:3000/rooms/public").catch(function (err) {
@@ -10372,9 +10374,9 @@ var process_public_room_list = /*#__PURE__*/function () {
             pb_room_list = _context.sent;
 
             if (pb_room_list.data.length !== 0) {
-              // Creating list elements if leangth is more then 0
+              (0, _change_page.change_element)("ul_pub_room", ""); // Creating list elements if leangth is more then 0
+
               ui = document.getElementById("ul_pub_room");
-              (0, _change_page.change_element)("ul_pub_room", _loader.loder);
               pb_room_list.data.forEach(function (val) {
                 _Global.public_rooms.push(val); // Pushing public rooms to global clint side
                 // Old way to display the list of public rooms
@@ -10772,7 +10774,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60548" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52196" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

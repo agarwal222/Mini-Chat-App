@@ -25,6 +25,7 @@ export const chat_room_start = () => {
 
         // Sending msg package to server
         socket.emit("msg_req" , {
+            "email": global.email,
             "userName": global.user_name,
             "roomID" : global.room.roomID,
             "message" : messg
@@ -41,7 +42,7 @@ export const chat_room_start = () => {
         let classes = "msg_contaner"
 
         // Cheaking username
-        msg.userName == global.user_name ? classes = `"me msg_contaner"` : classes = "msg_contaner"
+        msg.email == global.email ? classes = `"me msg_contaner"` : classes = "msg_contaner"
 
         const chat_msg = `
             <div class=${classes}>

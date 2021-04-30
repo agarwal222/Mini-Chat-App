@@ -6,15 +6,16 @@ import { loder } from "../views/Icons/loader";
 
 export const process_public_room_list = async () => {
     // the loading screan before loading public room list
-    change_element("ul_pub_room","LOADING")   
+    // change_element("ul_pub_room","LOADING")   
+    change_element("ul_pub_room",loder)
 
     // GET request to public rooms api
     const pb_room_list = await axios.get("http://localhost:3000/rooms/public").catch( err => ( console.log(err.data)))
 
     if (pb_room_list.data.length !== 0) { 
+        change_element("ul_pub_room","")
         // Creating list elements if leangth is more then 0
         const ui = document.getElementById("ul_pub_room")
-        change_element("ul_pub_room",loder)
         pb_room_list.data.forEach(val => {
             public_rooms.push(val); // Pushing public rooms to global clint side
             // Old way to display the list of public rooms

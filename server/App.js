@@ -168,7 +168,8 @@ io.on("connection", (soc) => {
         console.log(msg_obj);
         io.in(msg_obj.roomID).emit("msg_res", {
             "message": msg_obj.message,
-            "userName": msg_obj.userName
+            "userName": msg_obj.userName,
+            "email": msg_obj.email
         })
     })
 })
