@@ -7,7 +7,7 @@ import { chat_room_start } from "../Model/send_msg";
 export const check_room_avalable = async (iD) => {
     const room_check = await axios.post("http://localhost:3000/checkroom",{
         roomID: iD,
-        userName: global.user_name
+        email: global.email
     }).catch( err => ( console.log(err)))
     if (room_check.status == 200) {
         global.room.roomName = room_check.data.roomName

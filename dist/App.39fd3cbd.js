@@ -10266,7 +10266,7 @@ var check_room_avalable = /*#__PURE__*/function () {
             _context.next = 2;
             return _axios.default.post("http://localhost:3000/checkroom", {
               roomID: iD,
-              userName: _Global.global.user_name
+              email: _Global.global.email
             }).catch(function (err) {
               return console.log(err);
             });
@@ -10468,6 +10468,7 @@ var create_new_room = /*#__PURE__*/function () {
             _context.next = 2;
             return _axios.default.post("http://localhost:3000/rooms", {
               userName: _Global.global.user_name,
+              email: _Global.global.email,
               roomName: _Global.global.room.roomName,
               roomID: _Global.global.room.roomID,
               isPrivate: _Global.global.room.isPrivate
@@ -10726,7 +10727,7 @@ window.addEventListener("beforeunload", /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             _context.next = 2;
-            return _axios.default.get("http://localhost:3000/delete/".concat(_Global.global.user_name)).catch(function (err) {
+            return _axios.default.get("http://localhost:3000/delete/".concat(_Global.global.email)).catch(function (err) {
               return console.log(err);
             });
 

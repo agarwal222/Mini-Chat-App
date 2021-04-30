@@ -44,7 +44,7 @@ const rooms = [
 const user_room_relation = [
     // user_room_relation array structure example
     // {
-            // "userName" : "user's name (siaplay name)",
+            // "email" : "user's email",
             // "roomName" : "room name he / she jponed in",
             // "roomID" : the room ID of the room
     // }
@@ -74,27 +74,29 @@ app.post('/users', (req,res) => {
 })
 
 // Delete request for the user
-app.get("/delete/:user_name", (req,res) => {
+app.get("/delete/:email", (req,res) => {
 
     let us_del;
     console.log("deleting user .........");
 
     // deleating the user once found
     const delet = users.find((val,ind) => {
-        if(req.params.user_name == val.user_name){
+        if(req.params.email == val.email){
+            console.log(ind);
             users.splice(ind,1); // deleating user feom array
             const u_r_r_i = user_room_relation.find((vall,indd) => {
-                if(vall.userName == val.user_name){
+                if(vall.email == val.email){
                     console.log(indd);
                     user_room_relation.splice(ind,1); // Deleting from relation array
                 }
             })
             res.status(200).send(users);
             us_del = true
+            console.log("user deleted......");
         }
     });
 
-    if(!us_del){
+    if(us_del == false){
         res.status(404).send("user not exist")
     }
     // console.log(req.params);
@@ -117,7 +119,7 @@ app.get("/rooms/public", (req,res) => {
 app.post('/rooms', (req,res) => {
     //pushing user room relation info
     user_room_relation.push({
-        "userName" : req.body.userName,
+        "email" : req.body.email,
         "roomName" : req.body.roomName,
         "roomID" : req.body.roomID
     })
@@ -137,21 +139,23 @@ app.post('/rooms', (req,res) => {
 // POST request for checking the room if avalable or not
 app.post("/checkroom" ,(req, res) => {
     console.log(req.body);
+    let fnd = false;
     const find = rooms.find((val,ind) => {
         if (req.body.roomID == val.roomID) {
             console.log("ID found");
             user_room_relation.push(
                 {
-                    "userName" : req.body.userName,
+                    "email" : req.body.email,
                     "roomName" : val.roomName,
                     "roomID" : val.roomID
                 }
             )
             console.log(user_room_relation);
             res.status(200).send(val)
+            fnd = true
         }
     })
-    if(!find){
+    if(fnd == false){
         res.status(500).send("not found")
         console.log("not found room");
     }
