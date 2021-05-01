@@ -2739,7 +2739,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.chatRoom = void 0;
-var chatRoom = "\n<div class=\"chat_room\">\n    <section class=\"chat_area\">\n        <h2 class=\"label\">Chat Room </h2>\n        <div class=\"chat_contaner\" id=\"chat_contaner\">\n            <!-- <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"me msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque aperiam porro dolore repudiandae molestiae dolor dolorum delectus possimus provident id hic minima in, beatae modi ipsa consectetur rem ratione impedit nesciunt at placeat maxime repellendus itaque. Expedita quaerat veritatis ipsa sunt nobis beatae quos, corporis, modi dolorum ab, quidem quisquam!</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div> -->\n        </div>\n    </section>\n    <section class=\"form_contaner\">\n        <input type=\"text\" name=\"chat_msg\" id=\"chat_msh\">\n        <button id=\"chat_send_btn\" class=\"send_btn\"><span class=\"material-icons\">\n        send\n        </span></button>\n    </section>\n</div>\n";
+var chatRoom = "\n<div class=\"chat_room\">\n    <section class=\"chat_area\">\n        <h2 class=\"label\">Chat Room </h2>\n        <div class=\"chat_contaner\" id=\"chat_contaner\">\n            <!-- <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"me msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Doloremque aperiam porro dolore repudiandae molestiae dolor dolorum delectus possimus provident id hic minima in, beatae modi ipsa consectetur rem ratione impedit nesciunt at placeat maxime repellendus itaque. Expedita quaerat veritatis ipsa sunt nobis beatae quos, corporis, modi dolorum ab, quidem quisquam!</div>\n            </div>\n            <div class=\"msg_contaner\">\n                <h5 class=\"user_name\">Utkarsh</h5>\n                <div class=\"msg\">Lorem ipsum dolor sit amet consectetur adipisicing elit. Dignissimos, cumque.</div>\n            </div> -->\n        </div>\n    </section>\n    <section class=\"form_contaner\">\n        <textarea name=\"chat_msg\" id=\"chat_msh\"></textarea>\n        <button id=\"chat_send_btn\" class=\"send_btn\">\n            <span class=\"material-icons\">send</span>\n        </button>\n    </section>\n</div>\n";
 exports.chatRoom = chatRoom;
 },{}],"../node_modules/parseuri/index.js":[function(require,module,exports) {
 /**
@@ -10187,7 +10187,8 @@ var chat_room_start = function chat_room_start() {
       var p1 = string.replace(/</gi, '&lt');
       var p2 = p1.replace(/>/gi, '&gt');
       var p3 = p2.replace(/[.*+?^${}()|[\]\\]/gi, '\\$&');
-      return p3;
+      var p4 = p3.replace(/\n/gi, '<br>');
+      return p4;
     }
 
     var messg = escapeRegExp(msg.toString()); // Sending msg package to server
@@ -10775,7 +10776,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52196" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58861" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

@@ -287,8 +287,17 @@ input {
   justify-self: center;
   align-self: center;
 }
-.chat_room .form_contaner input {
-  padding: 1em;
+.chat_room .form_contaner textarea {
+  padding: 0.5em;
+  background-color: #3C3B66;
+  color: #8585C7;
+  border: 1px solid #8585C7;
+  border-radius: 10px;
+  height: 3em;
+  resize: none;
+}
+.chat_room .form_contaner textarea::-webkit-scrollbar {
+  display: none;
 }
 .chat_room .form_contaner button {
   margin: 0;

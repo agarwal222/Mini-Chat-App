@@ -26,10 +26,10 @@ export const chatRoom = `
         </div>
     </section>
     <section class="form_contaner">
-        <input type="text" name="chat_msg" id="chat_msh">
-        <button id="chat_send_btn" class="send_btn"><span class="material-icons">
-        send
-        </span></button>
+        <textarea name="chat_msg" id="chat_msh"></textarea>
+        <button id="chat_send_btn" class="send_btn">
+            <span class="material-icons">send</span>
+        </button>
     </section>
 </div>
 `

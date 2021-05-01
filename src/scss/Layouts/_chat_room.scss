@@ -60,8 +60,18 @@
         justify-self: center;
         align-self: center;
 
-        input{
-            padding: 1em;
+        textarea{
+            padding: 0.5em;
+            background-color: col.$comp_bg;
+            color: col.$text_col;
+            border: 1px solid col.$text_col;
+            border-radius: 10px;
+            height: 3em;
+            resize: none;
+
+             &::-webkit-scrollbar{
+                 display: none;
+             }
         }
 
         button{

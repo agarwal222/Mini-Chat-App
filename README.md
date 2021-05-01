@@ -17,10 +17,7 @@ To get a local copy up and running follow these simple example steps.
 
 ## Pre-Requirment
 
-* npm
-  ```sh
-  npm install npm@latest -g
-  ```
+* Install Node.Js
 
 ## Instalation
 
