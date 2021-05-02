@@ -11,20 +11,25 @@ export const creat_room_cnt = () => {
         const isPrivate = document.getElementById("private_room")
         change_element("center_left", loder)
         const Id = Date.now()
-        if(isPrivate.checked){
-            global.room.roomName = roomName
-            global.room.roomID = Id
-            global.room.isPrivate = true
-            create_new_room();
-            console.log(global);
-            change_page("center_left", chatRoom , chat_room_start)
+        if (roomName) {
+            if(isPrivate.checked){
+                global.room.roomName = roomName
+                global.room.roomID = Id
+                global.room.isPrivate = true
+                create_new_room();
+                console.log(global);
+                change_page("center_left", chatRoom , chat_room_start)
+            }else{
+                global.room.roomName = roomName
+                global.room.roomID = Id
+                global.room.isPrivate = false
+                console.log(global);
+                create_new_room();
+                change_page("center_left", chatRoom , chat_room_start)
+            }
         }else{
-            global.room.roomName = roomName
-            global.room.roomID = Id
-            global.room.isPrivate = false
-            console.log(global);
-            create_new_room();
-            change_page("center_left", chatRoom , chat_room_start)
+            change_page("center_left",LoginPage,login_load);
+            document.getElementById("err").innerHTML = "Can't be empty";
         }
     })
 }

@@ -10523,20 +10523,25 @@ var creat_room_cnt = function creat_room_cnt() {
     (0, _change_page.change_element)("center_left", _loader.loder);
     var Id = Date.now();
 
-    if (isPrivate.checked) {
-      _Global.global.room.roomName = roomName;
-      _Global.global.room.roomID = Id;
-      _Global.global.room.isPrivate = true;
-      (0, _create_new_room.create_new_room)();
-      console.log(_Global.global);
-      (0, _change_page.change_page)("center_left", _chatRoom.chatRoom, _send_msg.chat_room_start);
+    if (roomName) {
+      if (isPrivate.checked) {
+        _Global.global.room.roomName = roomName;
+        _Global.global.room.roomID = Id;
+        _Global.global.room.isPrivate = true;
+        (0, _create_new_room.create_new_room)();
+        console.log(_Global.global);
+        (0, _change_page.change_page)("center_left", _chatRoom.chatRoom, _send_msg.chat_room_start);
+      } else {
+        _Global.global.room.roomName = roomName;
+        _Global.global.room.roomID = Id;
+        _Global.global.room.isPrivate = false;
+        console.log(_Global.global);
+        (0, _create_new_room.create_new_room)();
+        (0, _change_page.change_page)("center_left", _chatRoom.chatRoom, _send_msg.chat_room_start);
+      }
     } else {
-      _Global.global.room.roomName = roomName;
-      _Global.global.room.roomID = Id;
-      _Global.global.room.isPrivate = false;
-      console.log(_Global.global);
-      (0, _create_new_room.create_new_room)();
-      (0, _change_page.change_page)("center_left", _chatRoom.chatRoom, _send_msg.chat_room_start);
+      (0, _change_page.change_page)("center_left", LoginPage, login_load);
+      document.getElementById("err").innerHTML = "Can't be empty";
     }
   });
 };
@@ -10642,9 +10647,9 @@ var check = /*#__PURE__*/function () {
             (0, _change_page.change_element)("center_left", _loader.loder); // Validating email
 
             valifateEmail = function valifateEmail(email) {
-              var mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+              var mailformat = /(?:[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*|"(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21\x23-\x5b\x5d-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])*")@(?:(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?|\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?|[a-z0-9-]*[a-z0-9]:(?:[\x01-\x08\x0b\x0c\x0e-\x1f\x21-\x5a\x53-\x7f]|\\[\x01-\x09\x0b\x0c\x0e-\x7f])+)\])/;
 
-              if (email.match(mailformat)) {
+              if (mailformat.test(email)) {
                 return true;
               } else {
                 return false;
