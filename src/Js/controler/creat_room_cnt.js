@@ -4,6 +4,7 @@ import { change_element, change_page } from "./change_page";
 import { chatRoom } from "../views/chatRoom";
 import { chat_room_start } from "../Model/send_msg";
 import { loder } from "../views/Icons/loader";
+import { creatRoom } from "../views/creatRoom";
 
 export const creat_room_cnt = () => {
     document.getElementById("creat_room").addEventListener("click", () => {
@@ -11,7 +12,7 @@ export const creat_room_cnt = () => {
         const isPrivate = document.getElementById("private_room")
         change_element("center_left", loder)
         const Id = Date.now()
-        if (roomName) {
+        if (roomName != "") {
             if(isPrivate.checked){
                 global.room.roomName = roomName
                 global.room.roomID = Id
@@ -28,7 +29,7 @@ export const creat_room_cnt = () => {
                 change_page("center_left", chatRoom , chat_room_start)
             }
         }else{
-            change_page("center_left",LoginPage,login_load);
+            change_page("center_left",creatRoom,creat_room_cnt);
             document.getElementById("err").innerHTML = "Can't be empty";
         }
     })

@@ -10495,7 +10495,16 @@ var create_new_room = /*#__PURE__*/function () {
 }();
 
 exports.create_new_room = create_new_room;
-},{"../Global":"Js/Global.js","axios":"../node_modules/axios/index.js"}],"Js/controler/creat_room_cnt.js":[function(require,module,exports) {
+},{"../Global":"Js/Global.js","axios":"../node_modules/axios/index.js"}],"Js/views/creatRoom.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.creatRoom = void 0;
+var creatRoom = "\n<div class=\"create_room\">\n<h1>Create A Room</h1>\n<section class=\"form_contaner\">\n    <label for=\"room_name\">Enter a room name</label>\n    <input type=\"text\" name=\"room_name\" id=\"room_name\">\n    <label class=\"private_room_labl\" for=\"private_room\">\n        <input type=\"checkbox\" name=\"privare_room\" id=\"private_room\" class=\"private_room_check\">\n        <spam class=\"spam_checkbox\"></spam>\n        Make the room private\n    </label>\n    <button class=\"creat_room\" id=\"creat_room\">Creat room</button>\n    <div class=\"bysection\"><h2>Or</h2></div>\n    <button class=\"join_room\" id=\"join_room\">Join a room</button>\n</section>\n<spam id=\"err\"></spam>\n</div>\n";
+exports.creatRoom = creatRoom;
+},{}],"Js/controler/creat_room_cnt.js":[function(require,module,exports) {
 
 "use strict";
 
@@ -10516,6 +10525,8 @@ var _send_msg = require("../Model/send_msg");
 
 var _loader = require("../views/Icons/loader");
 
+var _creatRoom = require("../views/creatRoom");
+
 var creat_room_cnt = function creat_room_cnt() {
   document.getElementById("creat_room").addEventListener("click", function () {
     var roomName = document.getElementById("room_name").value;
@@ -10523,7 +10534,7 @@ var creat_room_cnt = function creat_room_cnt() {
     (0, _change_page.change_element)("center_left", _loader.loder);
     var Id = Date.now();
 
-    if (roomName) {
+    if (roomName != "") {
       if (isPrivate.checked) {
         _Global.global.room.roomName = roomName;
         _Global.global.room.roomID = Id;
@@ -10540,23 +10551,14 @@ var creat_room_cnt = function creat_room_cnt() {
         (0, _change_page.change_page)("center_left", _chatRoom.chatRoom, _send_msg.chat_room_start);
       }
     } else {
-      (0, _change_page.change_page)("center_left", LoginPage, login_load);
+      (0, _change_page.change_page)("center_left", _creatRoom.creatRoom, creat_room_cnt);
       document.getElementById("err").innerHTML = "Can't be empty";
     }
   });
 };
 
 exports.creat_room_cnt = creat_room_cnt;
-},{"../Global":"Js/Global.js","../Model/create_new_room":"Js/Model/create_new_room.js","./change_page":"Js/controler/change_page.js","../views/chatRoom":"Js/views/chatRoom.js","../Model/send_msg":"Js/Model/send_msg.js","../views/Icons/loader":"Js/views/Icons/loader.js"}],"Js/views/creatRoom.js":[function(require,module,exports) {
-"use strict";
-
-Object.defineProperty(exports, "__esModule", {
-  value: true
-});
-exports.creatRoom = void 0;
-var creatRoom = "\n<div class=\"create_room\">\n<h1>Create A Room</h1>\n<section class=\"form_contaner\">\n    <label for=\"room_name\">Enter a room name</label>\n    <input type=\"text\" name=\"room_name\" id=\"room_name\">\n    <label class=\"private_room_labl\" for=\"private_room\">\n        <input type=\"checkbox\" name=\"privare_room\" id=\"private_room\" class=\"private_room_check\">\n        <spam class=\"spam_checkbox\"></spam>\n        Make the room private\n    </label>\n    <button class=\"creat_room\" id=\"creat_room\">Creat room</button>\n    <div class=\"bysection\"><h2>Or</h2></div>\n    <button class=\"join_room\" id=\"join_room\">Join a room</button>\n</section>\n</div>\n";
-exports.creatRoom = creatRoom;
-},{}],"Js/views/joinRoom.js":[function(require,module,exports) {
+},{"../Global":"Js/Global.js","../Model/create_new_room":"Js/Model/create_new_room.js","./change_page":"Js/controler/change_page.js","../views/chatRoom":"Js/views/chatRoom.js","../Model/send_msg":"Js/Model/send_msg.js","../views/Icons/loader":"Js/views/Icons/loader.js","../views/creatRoom":"Js/views/creatRoom.js"}],"Js/views/joinRoom.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

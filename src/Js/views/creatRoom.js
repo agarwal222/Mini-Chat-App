@@ -13,5 +13,6 @@ export const creatRoom = `
     <div class="bysection"><h2>Or</h2></div>
     <button class="join_room" id="join_room">Join a room</button>
 </section>
+<spam id="err"></spam>
 </div>
 `
