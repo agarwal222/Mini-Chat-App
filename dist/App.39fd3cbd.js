@@ -10630,7 +10630,7 @@ function _asyncToGenerator(fn) { return function () { var self = this, args = ar
 
 var check = /*#__PURE__*/function () {
   var _ref = _asyncToGenerator( /*#__PURE__*/regeneratorRuntime.mark(function _callee() {
-    var promis;
+    var valifateEmail, promis;
     return regeneratorRuntime.wrap(function _callee$(_context) {
       while (1) {
         switch (_context.prev = _context.next) {
@@ -10638,16 +10638,31 @@ var check = /*#__PURE__*/function () {
             // getting the data page 
             _Global.global.user_name = document.getElementById("display_name").value;
             _Global.global.email = document.getElementById("email").value; // the loading screan before call is done
-            // document.getElementById("center_left").innerHTML = "Loading...";
 
-            (0, _change_page.change_element)("center_left", _loader.loder); // Making the POST API call
+            (0, _change_page.change_element)("center_left", _loader.loder); // Validating email
+
+            valifateEmail = function valifateEmail(email) {
+              var mailformat = /^w+([.-]?w+)*@w+([.-]?w+)*(.w{2,3})+$/;
+
+              if (email.match(mailformat)) {
+                return true;
+              } else {
+                return false;
+              }
+            }; // Making the POST API call
+
 
             if (!(_Global.global.user_name && _Global.global.email)) {
-              _context.next = 9;
+              _context.next = 15;
               break;
             }
 
-            _context.next = 6;
+            if (!valifateEmail(_Global.global.email)) {
+              _context.next = 11;
+              break;
+            }
+
+            _context.next = 8;
             return _axios.default.post("http://localhost:3000/users", {
               user_name: _Global.global.user_name,
               email: _Global.global.email
@@ -10658,16 +10673,24 @@ var check = /*#__PURE__*/function () {
               document.getElementById("err").innerHTML = "User already exist";
             });
 
-          case 6:
+          case 8:
             promis = _context.sent;
-            _context.next = 11;
+            _context.next = 13;
             break;
 
-          case 9:
+          case 11:
+            (0, _change_page.change_page)("center_left", _loginPage.LoginPage, _login_load.login_load);
+            document.getElementById("err").innerHTML = "It should be an email";
+
+          case 13:
+            _context.next = 17;
+            break;
+
+          case 15:
             (0, _change_page.change_page)("center_left", _loginPage.LoginPage, _login_load.login_load);
             document.getElementById("err").innerHTML = "Can't be empty";
 
-          case 11:
+          case 17:
           case "end":
             return _context.stop();
         }
@@ -10776,7 +10799,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "58861" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "60497" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
