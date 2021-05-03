@@ -10210,7 +10210,7 @@ var chat_room_start = function chat_room_start() {
     var contaner = document.getElementById("chat_contaner");
     var classes = "msg_contaner"; // Cheaking username
 
-    msg.email == _Global.global.email ? classes = "\"me msg_contaner\"" : classes = "msg_contaner";
+    msg.email == _Global.global.email ? classes = "\"msg_contaner me\"" : classes = "msg_contaner";
     var chat_msg = "\n            <div class=".concat(classes, ">\n                <h5 class=\"user_name\">").concat(msg.userName, "</h5>\n                <div class=\"msg\">").concat(msg.message, "</div>\n            </div>"); // Incering child elements
 
     contaner.insertAdjacentHTML('beforeend', chat_msg); // Scrolling to the last msg 

@@ -265,19 +265,20 @@ input {
   border: 1px solid #8585C7;
   overflow-y: scroll;
 }
-.chat_room .chat_area .chat_contaner .me {
-  float: right;
-}
 .chat_room .chat_area .chat_contaner .msg_contaner {
   display: grid;
   grid-template-rows: auto auto;
-  background-color: #232358;
+  background-color: #0f0f24;
   width: 50%;
   max-width: 200px;
   border-radius: 10px;
   padding: 0.2em 1em;
   margin: 0.5em;
   word-break: break-all;
+}
+.chat_room .chat_area .chat_contaner .me {
+  float: right;
+  background-color: #232358;
 }
 .chat_room .form_contaner {
   margin-top: -30px;

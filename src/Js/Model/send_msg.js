@@ -44,7 +44,7 @@ export const chat_room_start = () => {
         let classes = "msg_contaner"
 
         // Cheaking username
-        msg.email == global.email ? classes = `"me msg_contaner"` : classes = "msg_contaner"
+        msg.email == global.email ? classes = `"msg_contaner me"` : classes = "msg_contaner"
 
         const chat_msg = `
             <div class=${classes}>

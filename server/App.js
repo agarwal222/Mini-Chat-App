@@ -80,21 +80,14 @@ app.get("/delete/:email", (req,res) => {
     console.log("deleting user .........");
 
     // deleating the user once found
-    const delet = users.find((val,ind) => {
-        if(req.params.email == val.email){
-            console.log(ind);
-            users.splice(ind,1); // deleating user feom array
-            const u_r_r_i = user_room_relation.find((vall,indd) => {
-                if(vall.email == val.email){
-                    console.log(indd);
-                    user_room_relation.splice(ind,1); // Deleting from relation array
-                }
-            })
-            res.status(200).send(users);
-            us_del = true
-            console.log("user deleted......");
-        }
-    });
+    const delet = users.indexOf(req.params.email)
+    users.splice(delet,1); // deleating user feom array
+    const u_r_r_i = user_room_relation.indexOf(req.params.email)
+    user_room_relation.splice(u_r_r_i,1); // Deleting from relation array
+    console.log(user_room_relation, users);
+    res.status(200).send(users);
+    us_del = true
+    console.log("user deleted......");
 
     if(us_del == false){
         res.status(404).send("user not exist")
