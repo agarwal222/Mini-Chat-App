@@ -58,7 +58,7 @@ export const chat_room_start = () => {
         // Scrolling to the last msg 
         let ele = document.getElementsByClassName("msg_contaner");
         let last_ele = ele.length-1;
-        ele[last_ele].scrollIntoView(true);
+        ele[last_ele].scrollIntoView({behavior: "smooth", block: "end"});
         // console.log(ele[last_ele]);
     })
 

@@ -10217,7 +10217,10 @@ var chat_room_start = function chat_room_start() {
 
     var ele = document.getElementsByClassName("msg_contaner");
     var last_ele = ele.length - 1;
-    ele[last_ele].scrollIntoView(true); // console.log(ele[last_ele]);
+    ele[last_ele].scrollIntoView({
+      behavior: "smooth",
+      block: "end"
+    }); // console.log(ele[last_ele]);
   }); // Event Listners for sending msg
 
   document.getElementById("chat_send_btn").addEventListener("click", msg_request_method); // establishing connetion
