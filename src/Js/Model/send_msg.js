@@ -19,7 +19,8 @@ export const chat_room_start = () => {
             let p2 = p1.replace(/>/gi, '&gt');
             let p3 = p2.replace(/[.*+?^${}()|[\]\\]/gi, '\\$&')
             let p4 = p3.replace(/\n/gi, '<br>')
-            return p4
+            let p5 = p4.replace(/(<br>)+$/gi, '')
+            return p5
         }
 
         let messg = escapeRegExp(msg.toString());
