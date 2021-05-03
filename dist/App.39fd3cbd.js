@@ -10414,37 +10414,16 @@ var process_public_room_list = /*#__PURE__*/function () {
 }();
 
 exports.process_public_room_list = process_public_room_list;
-},{"axios":"../node_modules/axios/index.js","../Global":"Js/Global.js","../controler/change_page":"Js/controler/change_page.js","./join_public_room":"Js/Model/join_public_room.js","../views/Icons/loader":"Js/views/Icons/loader.js"}],"Js/controler/Join_room_cnt.js":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js","../Global":"Js/Global.js","../controler/change_page":"Js/controler/change_page.js","./join_public_room":"Js/Model/join_public_room.js","../views/Icons/loader":"Js/views/Icons/loader.js"}],"Js/views/creatRoom.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.join_room_cnt = void 0;
-
-var _change_page = require("./change_page");
-
-var _publicRoomsList = require("../views/publicRoomsList");
-
-var _process_public_room = require("../Model/process_public_room");
-
-var _chck_room_avalable = require("../Model/chck_room_avalable");
-
-var _loader = require("../views/Icons/loader");
-
-var join_room_cnt = function join_room_cnt() {
-  console.log("join room clicked");
-  document.getElementById("join_room_id").addEventListener("click", function () {
-    var idInput = document.getElementById("room_id");
-    var inputVal = idInput.value;
-    (0, _change_page.change_element)("center_left", _loader.loder);
-    (0, _chck_room_avalable.check_room_avalable)(inputVal);
-  });
-  (0, _change_page.change_page)("center_right", _publicRoomsList.publicRoomList, _process_public_room.process_public_room_list);
-};
-
-exports.join_room_cnt = join_room_cnt;
-},{"./change_page":"Js/controler/change_page.js","../views/publicRoomsList":"Js/views/publicRoomsList.js","../Model/process_public_room":"Js/Model/process_public_room.js","../Model/chck_room_avalable":"Js/Model/chck_room_avalable.js","../views/Icons/loader":"Js/views/Icons/loader.js"}],"Js/Model/create_new_room.js":[function(require,module,exports) {
+exports.creatRoom = void 0;
+var creatRoom = "\n<div class=\"create_room\">\n<h1>Create A Room</h1>\n<section class=\"form_contaner\">\n    <label for=\"room_name\">Enter a room name</label>\n    <input type=\"text\" name=\"room_name\" id=\"room_name\">\n    <label class=\"private_room_labl\" for=\"private_room\">\n        <input type=\"checkbox\" name=\"privare_room\" id=\"private_room\" class=\"private_room_check\">\n        <spam class=\"spam_checkbox\"></spam>\n        Make the room private\n    </label>\n    <button class=\"creat_room\" id=\"creat_room\">Creat room</button>\n    <div class=\"bysection\"><h2>Or</h2></div>\n    <button class=\"join_room\" id=\"join_room\">Join a room</button>\n</section>\n<spam id=\"err\"></spam>\n</div>\n";
+exports.creatRoom = creatRoom;
+},{}],"Js/Model/create_new_room.js":[function(require,module,exports) {
 
 "use strict";
 
@@ -10499,15 +10478,15 @@ var create_new_room = /*#__PURE__*/function () {
 }();
 
 exports.create_new_room = create_new_room;
-},{"../Global":"Js/Global.js","axios":"../node_modules/axios/index.js"}],"Js/views/creatRoom.js":[function(require,module,exports) {
+},{"../Global":"Js/Global.js","axios":"../node_modules/axios/index.js"}],"Js/views/joinRoom.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.creatRoom = void 0;
-var creatRoom = "\n<div class=\"create_room\">\n<h1>Create A Room</h1>\n<section class=\"form_contaner\">\n    <label for=\"room_name\">Enter a room name</label>\n    <input type=\"text\" name=\"room_name\" id=\"room_name\">\n    <label class=\"private_room_labl\" for=\"private_room\">\n        <input type=\"checkbox\" name=\"privare_room\" id=\"private_room\" class=\"private_room_check\">\n        <spam class=\"spam_checkbox\"></spam>\n        Make the room private\n    </label>\n    <button class=\"creat_room\" id=\"creat_room\">Creat room</button>\n    <div class=\"bysection\"><h2>Or</h2></div>\n    <button class=\"join_room\" id=\"join_room\">Join a room</button>\n</section>\n<spam id=\"err\"></spam>\n</div>\n";
-exports.creatRoom = creatRoom;
+exports.joinRoom = void 0;
+var joinRoom = "\n<div class=\"join_room\">\n<h1>Join A Room</h1>\n<section class=\"form_contaner\">\n    <label for=\"room_id\">Enter a room ID</label>\n    <input type=\"text\" name=\"room_id\" id=\"room_id\">\n    <button class=\"join_room_id\" id=\"join_room_id\">Join Room</button>\n    <div class=\"bysection\"><h2>Or</h2></div>\n    <button class=\"creat_room\" id=\"creat_room\">Create a room</button>\n</section>\n</div>\n";
+exports.joinRoom = joinRoom;
 },{}],"Js/controler/creat_room_cnt.js":[function(require,module,exports) {
 
 "use strict";
@@ -10530,6 +10509,10 @@ var _send_msg = require("../Model/send_msg");
 var _loader = require("../views/Icons/loader");
 
 var _creatRoom = require("../views/creatRoom");
+
+var _joinRoom = require("../views/joinRoom");
+
+var _Join_room_cnt = require("./Join_room_cnt");
 
 var creat_room_cnt = function creat_room_cnt() {
   document.getElementById("creat_room").addEventListener("click", function () {
@@ -10559,19 +10542,50 @@ var creat_room_cnt = function creat_room_cnt() {
       document.getElementById("err").innerHTML = "Can't be empty";
     }
   });
+  document.getElementById("join_room").addEventListener("click", function () {
+    (0, _change_page.change_page)("center_left", _joinRoom.joinRoom, _Join_room_cnt.join_room_cnt);
+  });
 };
 
 exports.creat_room_cnt = creat_room_cnt;
-},{"../Global":"Js/Global.js","../Model/create_new_room":"Js/Model/create_new_room.js","./change_page":"Js/controler/change_page.js","../views/chatRoom":"Js/views/chatRoom.js","../Model/send_msg":"Js/Model/send_msg.js","../views/Icons/loader":"Js/views/Icons/loader.js","../views/creatRoom":"Js/views/creatRoom.js"}],"Js/views/joinRoom.js":[function(require,module,exports) {
+},{"../Global":"Js/Global.js","../Model/create_new_room":"Js/Model/create_new_room.js","./change_page":"Js/controler/change_page.js","../views/chatRoom":"Js/views/chatRoom.js","../Model/send_msg":"Js/Model/send_msg.js","../views/Icons/loader":"Js/views/Icons/loader.js","../views/creatRoom":"Js/views/creatRoom.js","../views/joinRoom":"Js/views/joinRoom.js","./Join_room_cnt":"Js/controler/Join_room_cnt.js"}],"Js/controler/Join_room_cnt.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.joinRoom = void 0;
-var joinRoom = "\n<div class=\"join_room\">\n<h1>Join A Room</h1>\n<section class=\"form_contaner\">\n    <label for=\"room_id\">Enter a room ID</label>\n    <input type=\"text\" name=\"room_id\" id=\"room_id\">\n    <button class=\"join_room_id\" id=\"join_room_id\">Join Room</button>\n    <div class=\"bysection\"><h2>Or</h2></div>\n    <button class=\"creat_room\" id=\"creat_room\">Create a room</button>\n</section>\n</div>\n";
-exports.joinRoom = joinRoom;
-},{}],"Js/controler/create_or_join.js":[function(require,module,exports) {
+exports.join_room_cnt = void 0;
+
+var _change_page = require("./change_page");
+
+var _publicRoomsList = require("../views/publicRoomsList");
+
+var _process_public_room = require("../Model/process_public_room");
+
+var _chck_room_avalable = require("../Model/chck_room_avalable");
+
+var _loader = require("../views/Icons/loader");
+
+var _creatRoom = require("../views/creatRoom");
+
+var _creat_room_cnt = require("./creat_room_cnt");
+
+var join_room_cnt = function join_room_cnt() {
+  console.log("join room clicked");
+  document.getElementById("join_room_id").addEventListener("click", function () {
+    var idInput = document.getElementById("room_id");
+    var inputVal = idInput.value;
+    (0, _change_page.change_element)("center_left", _loader.loder);
+    (0, _chck_room_avalable.check_room_avalable)(inputVal);
+  });
+  (0, _change_page.change_page)("center_right", _publicRoomsList.publicRoomList, _process_public_room.process_public_room_list);
+  document.getElementById("creat_room").addEventListener("click", function () {
+    (0, _change_page.change_page)("center_left", _creatRoom.creatRoom, _creat_room_cnt.creat_room_cnt);
+  });
+};
+
+exports.join_room_cnt = join_room_cnt;
+},{"./change_page":"Js/controler/change_page.js","../views/publicRoomsList":"Js/views/publicRoomsList.js","../Model/process_public_room":"Js/Model/process_public_room.js","../Model/chck_room_avalable":"Js/Model/chck_room_avalable.js","../views/Icons/loader":"Js/views/Icons/loader.js","../views/creatRoom":"Js/views/creatRoom.js","./creat_room_cnt":"Js/controler/creat_room_cnt.js"}],"Js/controler/create_or_join.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {

@@ -5,6 +5,8 @@ import { chatRoom } from "../views/chatRoom";
 import { chat_room_start } from "../Model/send_msg";
 import { loder } from "../views/Icons/loader";
 import { creatRoom } from "../views/creatRoom";
+import { joinRoom } from "../views/joinRoom";
+import { join_room_cnt } from "./Join_room_cnt";
 
 export const creat_room_cnt = () => {
     document.getElementById("creat_room").addEventListener("click", () => {
@@ -32,5 +34,9 @@ export const creat_room_cnt = () => {
             change_page("center_left",creatRoom,creat_room_cnt);
             document.getElementById("err").innerHTML = "Can't be empty";
         }
+    })
+
+    document.getElementById("join_room").addEventListener("click", () => {
+        change_page("center_left",joinRoom,join_room_cnt);
     })
 }
