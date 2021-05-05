@@ -10189,7 +10189,8 @@ var chat_room_start = function chat_room_start() {
       var p3 = p2.replace(/[.*+?^${}()|[\]\\]/gi, '\\$&');
       var p4 = p3.replace(/\n/gi, '<br>');
       var p5 = p4.replace(/(<br>)+$/gi, '');
-      return p5;
+      var p6 = p5.replace(/^(<br>)+/gi, '');
+      return p6;
     }
 
     var messg = escapeRegExp(msg.toString()); // Sending msg package to server
@@ -10824,7 +10825,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "55475" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50488" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
