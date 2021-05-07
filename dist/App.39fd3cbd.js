@@ -10621,7 +10621,7 @@ Object.defineProperty(exports, "__esModule", {
   value: true
 });
 exports.LoginPage = void 0;
-var LoginPage = "\n<div class=\"login_pannel\">\n    <h1>Log In</h1>\n    <section class=\"form_contaner\">\n        <label for=\"email\" class=\"email\">E-Mail</label><span class=\"material-icons\">info</span><br />\n        <input type=\"email\" name=\"email\" class=\"email_input\" id=\"email\"><br />\n        <label for=\"display_name\" class=\"display_name\">Display Name</label><span class=\"material-icons\">info</span><br />\n        <input type=\"text\" name=\"display_name\" class=\"siaplay_name_input\" id=\"display_name\"><br />\n        <button type=\"submit\" id=\"btn\" class=\"login_btn\">Next</button>\n    </section>\n    <spam id=\"err\"></spam>\n</div>\n";
+var LoginPage = "\n<div class=\"login_pannel\">\n    <h1>Log In</h1>\n    <section class=\"form_contaner\">\n        <label for=\"email\" class=\"email\">E-Mail</label><span class=\"material-icons\" id=\"email_info_card\">info</span><br />\n        <input type=\"email\" name=\"email\" class=\"email_input\" id=\"email\"><br />\n        <label for=\"display_name\" class=\"display_name\">Display Name</label><span class=\"material-icons\" id=\"name_info_card\">info</span><br />\n        <input type=\"text\" name=\"display_name\" class=\"siaplay_name_input\" id=\"display_name\"><br />\n        <button type=\"submit\" id=\"btn\" class=\"login_btn\">Next</button>\n    </section>\n    <spam id=\"err\"></spam>\n</div>\n";
 exports.LoginPage = LoginPage;
 },{}],"Js/Model/login_check.js":[function(require,module,exports) {
 
@@ -10730,7 +10730,45 @@ var check = /*#__PURE__*/function () {
 }();
 
 exports.check = check;
-},{"axios":"../node_modules/axios/index.js","../views/createOrJoin":"Js/views/createOrJoin.js","../controler/change_page":"Js/controler/change_page.js","../Global":"Js/Global.js","../controler/create_or_join":"Js/controler/create_or_join.js","../views/loginPage":"Js/views/loginPage.js","../controler/login_load":"Js/controler/login_load.js","../views/Icons/loader":"Js/views/Icons/loader.js"}],"Js/controler/login_load.js":[function(require,module,exports) {
+},{"axios":"../node_modules/axios/index.js","../views/createOrJoin":"Js/views/createOrJoin.js","../controler/change_page":"Js/controler/change_page.js","../Global":"Js/Global.js","../controler/create_or_join":"Js/controler/create_or_join.js","../views/loginPage":"Js/views/loginPage.js","../controler/login_load":"Js/controler/login_load.js","../views/Icons/loader":"Js/views/Icons/loader.js"}],"Js/views/infoCards.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.nameInfo = exports.emailInfo = void 0;
+var emailInfo = "\n<h1>Email</h1>\n<section>\n    <p>This is the Email field where a user can type his/her email to uniquely define them in the application for the time they stay on the application</p>\n</section>\n";
+exports.emailInfo = emailInfo;
+var nameInfo = "\n<h1>Display Name</h1>\n<section>\n    <p>Display Name is used as a user name of the user , this name will be visianle to all others users on this application whoever is connected with you in a room and chatting.</p>\n</section>\n";
+exports.nameInfo = nameInfo;
+},{}],"Js/controler/info_cards_cnt.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.info_card_name = exports.info_card_login = void 0;
+
+var _infoCards = require("../views/infoCards");
+
+var _change_page = require("./change_page");
+
+var info_card_login = function info_card_login() {
+  document.getElementById('email_info_card').addEventListener("click", function () {
+    (0, _change_page.change_element)("center_right", _infoCards.emailInfo);
+  });
+};
+
+exports.info_card_login = info_card_login;
+
+var info_card_name = function info_card_name() {
+  document.getElementById('name_info_card').addEventListener("click", function () {
+    (0, _change_page.change_element)("center_right", _infoCards.nameInfo);
+  });
+};
+
+exports.info_card_name = info_card_name;
+},{"../views/infoCards":"Js/views/infoCards.js","./change_page":"Js/controler/change_page.js"}],"Js/controler/login_load.js":[function(require,module,exports) {
 "use strict";
 
 Object.defineProperty(exports, "__esModule", {
@@ -10742,15 +10780,19 @@ var _login_check = require("../Model/login_check");
 
 var _loginPage = require("../views/loginPage");
 
+var _info_cards_cnt = require("./info_cards_cnt");
+
 var login_load = function login_load() {
   // adding login templat to main window
-  document.getElementById("center_left").innerHTML = _loginPage.LoginPage; // Checking for user
+  document.getElementById("center_left").innerHTML = _loginPage.LoginPage;
+  (0, _info_cards_cnt.info_card_login)();
+  (0, _info_cards_cnt.info_card_name)(); // Checking for user
 
   document.getElementById("btn").addEventListener("click", _login_check.check);
 };
 
 exports.login_load = login_load;
-},{"../Model/login_check":"Js/Model/login_check.js","../views/loginPage":"Js/views/loginPage.js"}],"Js/App.js":[function(require,module,exports) {
+},{"../Model/login_check":"Js/Model/login_check.js","../views/loginPage":"Js/views/loginPage.js","./info_cards_cnt":"Js/controler/info_cards_cnt.js"}],"Js/App.js":[function(require,module,exports) {
 
 "use strict";
 
@@ -10825,7 +10867,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50488" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51489" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
