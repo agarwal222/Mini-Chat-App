@@ -1,5 +1,7 @@
 import { io } from "socket.io-client";
+import { change_element } from "../controler/change_page";
 import { global } from "../Global";
+import { room_details } from "../views/roomDetails";
 // import { send_msg } from "../Model/send_msg";
 // import { ws_con } from "../socket_connect";
 
@@ -72,9 +74,20 @@ export const chat_room_start = () => {
         socket.emit("user", {
             user_name : global.user_name,
             room_id : global.room.roomID
-        }); //will send username and room details from global
+        });//will send username and room details from global
+
+        socket.on("room_details", (det) => {
+            change_element("center_right", room_details)
+            change_element("room_id", `Room ID : ${det.roomID}`)
+            const contaner = document.getElementById("members")
+            det.users.forEach(element => {
+                let members = `<li>${element}</li>`
+                contaner.insertAdjacentHTML('beforeend', members);
+            });
+            console.log(det);
+        })
 
         console.log("its starting"); // just a tesing log
-    })
+    })  
 
 }

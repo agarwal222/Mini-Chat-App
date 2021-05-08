@@ -10160,7 +10160,16 @@ Object.defineProperty(exports, "Manager", {
   }
 });
 exports.default = lookup;
-},{"./url":"../node_modules/socket.io-client/build/url.js","./manager":"../node_modules/socket.io-client/build/manager.js","./socket":"../node_modules/socket.io-client/build/socket.js","debug":"../node_modules/debug/src/browser.js","socket.io-parser":"../node_modules/socket.io-parser/dist/index.js"}],"Js/Model/send_msg.js":[function(require,module,exports) {
+},{"./url":"../node_modules/socket.io-client/build/url.js","./manager":"../node_modules/socket.io-client/build/manager.js","./socket":"../node_modules/socket.io-client/build/socket.js","debug":"../node_modules/debug/src/browser.js","socket.io-parser":"../node_modules/socket.io-parser/dist/index.js"}],"Js/views/roomDetails.js":[function(require,module,exports) {
+"use strict";
+
+Object.defineProperty(exports, "__esModule", {
+  value: true
+});
+exports.room_details = void 0;
+var room_details = "\n<h1>Room Info</h1>\n<section>\n    <h3 id=\"room_id\">Room ID : </h3><br />\n    <h2> Room Members </h2><br />\n    <section calss=\"members\" id=\"members\">\n\n    </section>\n</section>\n";
+exports.room_details = room_details;
+},{}],"Js/Model/send_msg.js":[function(require,module,exports) {
 
 "use strict";
 
@@ -10171,7 +10180,11 @@ exports.chat_room_start = void 0;
 
 var _socket = require("socket.io-client");
 
+var _change_page = require("../controler/change_page");
+
 var _Global = require("../Global");
+
+var _roomDetails = require("../views/roomDetails");
 
 // import { send_msg } from "../Model/send_msg";
 // import { ws_con } from "../socket_connect";
@@ -10232,12 +10245,22 @@ var chat_room_start = function chat_room_start() {
       room_id: _Global.global.room.roomID
     }); //will send username and room details from global
 
+    socket.on("room_details", function (det) {
+      (0, _change_page.change_element)("center_right", _roomDetails.room_details);
+      (0, _change_page.change_element)("room_id", "Room ID : ".concat(det.roomID));
+      var contaner = document.getElementById("members");
+      det.users.forEach(function (element) {
+        var members = "<li>".concat(element, "</li>");
+        contaner.insertAdjacentHTML('beforeend', members);
+      });
+      console.log(det);
+    });
     console.log("its starting"); // just a tesing log
   });
 };
 
 exports.chat_room_start = chat_room_start;
-},{"socket.io-client":"../node_modules/socket.io-client/build/index.js","../Global":"Js/Global.js"}],"Js/Model/chck_room_avalable.js":[function(require,module,exports) {
+},{"socket.io-client":"../node_modules/socket.io-client/build/index.js","../controler/change_page":"Js/controler/change_page.js","../Global":"Js/Global.js","../views/roomDetails":"Js/views/roomDetails.js"}],"Js/Model/chck_room_avalable.js":[function(require,module,exports) {
 
 "use strict";
 
@@ -10867,7 +10890,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "51489" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52255" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

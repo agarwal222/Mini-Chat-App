@@ -157,10 +157,32 @@ app.post("/checkroom" ,(req, res) => {
 // socket io
 io.on("connection", (soc) => {
     console.log("connction mad with socket");
+
     soc.on("user",(socc) => {
         console.log(socc);
+        // Joining room
         soc.join(socc.room_id)
+
+        // Making an array of users in same room
+        let room_users = [];
+        user_room_relation.forEach((val) => {
+            if (val.roomID == socc.room_id) {
+                room_users.push(val.email)
+            }
+        })
+
+        // Sending the room data
+        io.in(socc.room_id).emit("room_details", {
+            "roomID": socc.room_id,
+            "users": room_users
+        })
+
+        soc.on("disconnect", () => {
+            console.log("soc disconnected ..........");
+            //TODO : To make the disconnection logic for socket (removing the user from the room_user array and emeting the aray again to front end)
+        })
     })
+
     soc.on("msg_req" ,(msg_obj) => {
         console.log(msg_obj);
         io.in(msg_obj.roomID).emit("msg_res", {
