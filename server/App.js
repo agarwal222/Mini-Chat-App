@@ -169,18 +169,10 @@ io.on("connection", (soc) => {
 
     // Making an array of users in same room
     let room_users = [];
-    // const room_user_update = () => {
-    //   room_users = [];
-    //   user_room_relation.forEach((val) => {
-    //     if (val.roomID == socc.room_id) {
-    //       room_users.push(val.email);
-    //     }
-    //   });
-    // };
 
+    // Updating the connected users list every second
     setInterval(() => {
       // console.log("IT WORKING INTERVAL");
-      // room_user_update();
       room_users = [];
       user_room_relation.forEach((val) => {
         if (val.roomID == socc.room_id) {
@@ -188,13 +180,12 @@ io.on("connection", (soc) => {
         }
       });
       // console.log(room_users);
+      // Sending the room data
       io.in(socc.room_id).emit("room_details", {
         roomID: socc.room_id,
         users: room_users,
       });
     }, 1000);
-
-    // Sending the room data
 
     // soc.on("disconnecting", () => {
     //   console.log("soc disconnecting ..........");
