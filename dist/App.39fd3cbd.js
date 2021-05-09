@@ -2708,12 +2708,12 @@ Object.defineProperty(exports, "__esModule", {
 });
 exports.public_rooms = exports.global = void 0;
 var global = {
-  "user_name": "",
-  "email": "",
-  "room": {
-    "roomName": "",
-    "roomID": 0,
-    "isPrivate": false
+  user_name: "",
+  email: "",
+  room: {
+    roomName: "",
+    roomID: 0,
+    isPrivate: false
   }
 };
 exports.global = global;
@@ -10197,22 +10197,22 @@ var chat_room_start = function chat_room_start() {
     var msg = msg_input.value; // message parser so that no HTML or JS code can be injected in the chat to prevent XSS
 
     function escapeRegExp(string) {
-      var p1 = string.replace(/</gi, '&lt');
-      var p2 = p1.replace(/>/gi, '&gt');
-      var p3 = p2.replace(/[.*+?^${}()|[\]\\]/gi, '\\$&');
-      var p4 = p3.replace(/\n/gi, '<br>');
-      var p5 = p4.replace(/(<br>)+$/gi, '');
-      var p6 = p5.replace(/^(<br>)+/gi, '');
+      var p1 = string.replace(/</gi, "&lt");
+      var p2 = p1.replace(/>/gi, "&gt");
+      var p3 = p2.replace(/[.*+?^${}()|[\]\\]/gi, "\\$&");
+      var p4 = p3.replace(/\n/gi, "<br>");
+      var p5 = p4.replace(/(<br>)+$/gi, "");
+      var p6 = p5.replace(/^(<br>)+/gi, "");
       return p6;
     }
 
     var messg = escapeRegExp(msg.toString()); // Sending msg package to server
 
     socket.emit("msg_req", {
-      "email": _Global.global.email,
-      "userName": _Global.global.user_name,
-      "roomID": _Global.global.room.roomID,
-      "message": messg
+      email: _Global.global.email,
+      userName: _Global.global.user_name,
+      roomID: _Global.global.room.roomID,
+      message: messg
     }); // emptying the input area
 
     msg_input.value = "";
@@ -10227,7 +10227,7 @@ var chat_room_start = function chat_room_start() {
     msg.email == _Global.global.email ? classes = "\"msg_contaner me\"" : classes = "msg_contaner";
     var chat_msg = "\n            <div class=".concat(classes, ">\n                <h5 class=\"user_name\">").concat(msg.userName, "</h5>\n                <div class=\"msg\">").concat(msg.message, "</div>\n            </div>"); // Incering child elements
 
-    contaner.insertAdjacentHTML('beforeend', chat_msg); // Scrolling to the last msg 
+    contaner.insertAdjacentHTML("beforeend", chat_msg); // Scrolling to the last msg
 
     var ele = document.getElementsByClassName("msg_contaner");
     var last_ele = ele.length - 1;
@@ -10251,9 +10251,8 @@ var chat_room_start = function chat_room_start() {
       var contaner = document.getElementById("members");
       det.users.forEach(function (element) {
         var members = "<li>".concat(element, "</li>");
-        contaner.insertAdjacentHTML('beforeend', members);
-      });
-      console.log(det);
+        contaner.insertAdjacentHTML("beforeend", members);
+      }); // console.log(det);
     });
     console.log("its starting"); // just a tesing log
   });
@@ -10391,7 +10390,7 @@ var process_public_room_list = /*#__PURE__*/function () {
         switch (_context.prev = _context.next) {
           case 0:
             // the loading screan before loading public room list
-            // change_element("ul_pub_room","LOADING")   
+            // change_element("ul_pub_room","LOADING")
             (0, _change_page.change_element)("ul_pub_room", _loader.loder); // GET request to public rooms api
 
             _context.next = 3;
@@ -10409,18 +10408,18 @@ var process_public_room_list = /*#__PURE__*/function () {
               pb_room_list.data.forEach(function (val) {
                 _Global.public_rooms.push(val); // Pushing public rooms to global clint side
                 // Old way to display the list of public rooms
-                // let li = document.createElement('li'); 
+                // let li = document.createElement('li');
                 // ui.appendChild(li)
-                // li.innerHTML += val.roomName 
-                // Desplaying public room list (new way) 
+                // li.innerHTML += val.roomName
+                // Desplaying public room list (new way)
 
 
                 var element = "<li id=".concat(val.roomID, ">").concat(val.roomName, "</li>");
-                ui.insertAdjacentHTML('beforeend', element);
+                ui.insertAdjacentHTML("beforeend", element);
                 (0, _join_public_room.joinPublicRoom)();
               });
             } else {
-              // else error handling 
+              // else error handling
               (0, _change_page.change_element)("ul_pub_room", "Not Found");
             }
 
@@ -10684,7 +10683,7 @@ var check = /*#__PURE__*/function () {
       while (1) {
         switch (_context.prev = _context.next) {
           case 0:
-            // getting the data page 
+            // getting the data page
             _Global.global.user_name = document.getElementById("display_name").value;
             _Global.global.email = document.getElementById("email").value; // the loading screan before call is done
 
@@ -10777,7 +10776,7 @@ var _infoCards = require("../views/infoCards");
 var _change_page = require("./change_page");
 
 var info_card_login = function info_card_login() {
-  document.getElementById('email_info_card').addEventListener("click", function () {
+  document.getElementById("email_info_card").addEventListener("click", function () {
     (0, _change_page.change_element)("center_right", _infoCards.emailInfo);
   });
 };
@@ -10785,7 +10784,7 @@ var info_card_login = function info_card_login() {
 exports.info_card_login = info_card_login;
 
 var info_card_name = function info_card_name() {
-  document.getElementById('name_info_card').addEventListener("click", function () {
+  document.getElementById("name_info_card").addEventListener("click", function () {
     (0, _change_page.change_element)("center_right", _infoCards.nameInfo);
   });
 };
@@ -10890,7 +10889,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "52255" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50462" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};

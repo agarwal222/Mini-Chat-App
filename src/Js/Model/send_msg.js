@@ -80,13 +80,13 @@ export const chat_room_start = () => {
 
     socket.on("room_details", (det) => {
       change_element("center_right", room_details);
-      change_element("room_id", `Room ID : ${det.roomIDs}`);
+      change_element("room_id", `Room ID : ${det.roomID}`);
       const contaner = document.getElementById("members");
       det.users.forEach((element) => {
         let members = `<li>${element}</li>`;
         contaner.insertAdjacentHTML("beforeend", members);
       });
-      console.log(det);
+      // console.log(det);
     });
 
     console.log("its starting"); // just a tesing log

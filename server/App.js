@@ -39,7 +39,8 @@ const rooms = [
   // {
   //     "roomName" : "Name of the Room",
   //     "roomID" : "ID of the room",
-  //     "isPrivate" : true or false (booion value)
+  //     "isPrivate" : true or false (booion value),
+  //     "users" : []
   // }
 ];
 
@@ -168,22 +169,41 @@ io.on("connection", (soc) => {
 
     // Making an array of users in same room
     let room_users = [];
-    user_room_relation.forEach((val) => {
-      if (val.roomID == socc.room_id) {
-        room_users.push(val.email);
-      }
-    });
+    // const room_user_update = () => {
+    //   room_users = [];
+    //   user_room_relation.forEach((val) => {
+    //     if (val.roomID == socc.room_id) {
+    //       room_users.push(val.email);
+    //     }
+    //   });
+    // };
+
+    setInterval(() => {
+      // console.log("IT WORKING INTERVAL");
+      // room_user_update();
+      room_users = [];
+      user_room_relation.forEach((val) => {
+        if (val.roomID == socc.room_id) {
+          room_users.push(val.email);
+        }
+      });
+      // console.log(room_users);
+      io.in(socc.room_id).emit("room_details", {
+        roomID: socc.room_id,
+        users: room_users,
+      });
+    }, 1000);
 
     // Sending the room data
-    io.in(socc.room_id).emit("room_details", {
-      roomID: socc.room_id,
-      users: room_users,
-    });
 
-    soc.on("disconnect", () => {
-      console.log("soc disconnected ..........");
-      //TODO : To make the disconnection logic for socket (removing the user from the room_user array and emeting the aray again to front end)
-    });
+    // soc.on("disconnecting", () => {
+    //   console.log("soc disconnecting ..........");
+    //   room_user_update();
+    //   io.in(socc.room_id).emit("room_details", {
+    //     roomID: socc.room_id,
+    //     users: room_users,
+    //   });
+    // });
   });
 
   soc.on("msg_req", (msg_obj) => {

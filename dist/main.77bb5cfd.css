@@ -307,6 +307,10 @@ input {
   place-items: center;
 }
 
+.center_right li {
+  list-style: none;
+}
+
 body {
   background-color: #24243D;
 }
@@ -361,6 +365,7 @@ body {
   list-style: none;
 }
 .center_right .public_rooms_list li {
+  list-style: none;
   margin: 0.1em 0.5em;
   display: inline-block;
   cursor: pointer;
