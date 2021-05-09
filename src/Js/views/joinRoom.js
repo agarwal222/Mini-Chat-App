@@ -9,4 +9,4 @@ export const joinRoom = `
     <button class="creat_room" id="creat_room">Create a room</button>
 </section>
 </div>
-`
+`;

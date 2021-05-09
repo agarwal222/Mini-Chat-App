@@ -7,4 +7,4 @@ export const room_details = `
 
     </section>
 </section>
-`
+`;

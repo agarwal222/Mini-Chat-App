@@ -8,4 +8,4 @@ export const publicRoomList = `
         
     </ul>
 </section>
-`
+`;

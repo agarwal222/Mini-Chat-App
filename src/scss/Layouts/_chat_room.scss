@@ -3,82 +3,82 @@
 @use "components/button";
 @use "components/input";
 
-.chat_room{
-    // background-color: col.$second_bg;
-    display: grid;
-    grid-template-rows: 90% 10%;
+.chat_room {
+  // background-color: col.$second_bg;
+  display: grid;
+  grid-template-rows: 90% 10%;
 
-    .chat_area{
-        width: calc(100% - 60px);
-        justify-self: center;
+  .chat_area {
+    width: calc(100% - 60px);
+    justify-self: center;
 
-        ::-webkit-scrollbar{
-            display: none;
-        }
-
-        .label{
-            font-size: fs.$base_font;
-            font-weight: 500;
-            margin: 0.2em;
-            margin-bottom: 0.3em;
-            align-self: flex-start;
-        }
-
-        .chat_contaner{
-            // display: grid;
-            width: 100%;
-            height: calc(100% - 60px);
-            max-height: 500px;
-            background-color: col.$comp_bg;
-            border: 1px solid col.$text_col;
-            overflow-y: scroll;
-
-            .msg_contaner{
-                display: grid;
-                grid-template-rows: auto auto;
-                background-color: hsl(240, 43%, 10%);
-                width: 50%;
-                max-width: 200px;
-                border-radius: 10px;
-                padding: 0.2em 1em;
-                margin: 0.5em;
-                word-break: break-all;
-            }
-
-            .me{
-                float: right;
-                background-color: rgb(35, 35, 88);
-            }
-        }
+    ::-webkit-scrollbar {
+      display: none;
     }
 
-    .form_contaner{
-        margin-top: -30px;
+    .label {
+      font-size: fs.$base_font;
+      font-weight: 500;
+      margin: 0.2em;
+      margin-bottom: 0.3em;
+      align-self: flex-start;
+    }
+
+    .chat_contaner {
+      // display: grid;
+      width: 100%;
+      height: calc(100% - 60px);
+      max-height: 500px;
+      background-color: col.$comp_bg;
+      border: 1px solid col.$text_col;
+      overflow-y: scroll;
+
+      .msg_contaner {
         display: grid;
-        grid-template-columns: 80% 20%;
-        width: calc(100% - 60px);
-        justify-self: center;
-        align-self: center;
+        grid-template-rows: auto auto;
+        background-color: hsl(240, 43%, 10%);
+        width: 50%;
+        max-width: 200px;
+        border-radius: 10px;
+        padding: 0.2em 1em;
+        margin: 0.5em;
+        word-break: break-all;
+      }
 
-        textarea{
-            padding: 0.5em;
-            background-color: col.$comp_bg;
-            color: col.$text_col;
-            border: 1px solid col.$text_col;
-            border-radius: 10px;
-            height: 3em;
-            resize: none;
-
-             &::-webkit-scrollbar{
-                 display: none;
-             }
-        }
-
-        button{
-            margin: 0;
-            padding: 0.4em 0.8em;
-            display: grid;
-            place-items: center;
-        }
+      .me {
+        float: right;
+        background-color: rgb(35, 35, 88);
+      }
     }
+  }
+
+  .form_contaner {
+    margin-top: -30px;
+    display: grid;
+    grid-template-columns: 80% 20%;
+    width: calc(100% - 60px);
+    justify-self: center;
+    align-self: center;
+
+    textarea {
+      padding: 0.5em;
+      background-color: col.$comp_bg;
+      color: col.$text_col;
+      border: 1px solid col.$text_col;
+      border-radius: 10px;
+      height: 3em;
+      resize: none;
+
+      &::-webkit-scrollbar {
+        display: none;
+      }
+    }
+
+    button {
+      margin: 0;
+      padding: 0.4em 0.8em;
+      display: grid;
+      place-items: center;
+    }
+  }
 }

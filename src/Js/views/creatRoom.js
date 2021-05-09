@@ -15,4 +15,4 @@ export const creatRoom = `
 </section>
 <spam id="err"></spam>
 </div>
-`
+`;
