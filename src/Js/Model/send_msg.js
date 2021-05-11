@@ -1,6 +1,6 @@
 import { io } from "socket.io-client";
 import { change_element } from "../controler/change_page";
-import { global } from "../Global";
+import { global, state } from "../Global";
 import { room_details } from "../views/roomDetails";
 // import { send_msg } from "../Model/send_msg";
 // import { ws_con } from "../socket_connect";
@@ -83,10 +83,9 @@ export const chat_room_start = () => {
       room_id: global.room.roomID,
     }); //will send username and room details from global
 
-    let det_user_ln_before = 0;
     socket.on("room_details", (det) => {
       // If statement to prevent re-rendering issue
-      if (det_user_ln_before != det.users.length) {
+      if (state.det_user_ln_before != det.users.length) {
         change_element("center_right", room_details);
         change_element("room_id", `Room ID : ${det.roomID}`);
         const contaner = document.getElementById("members");
@@ -94,7 +93,7 @@ export const chat_room_start = () => {
           let members = `<li>${element}</li>`;
           contaner.insertAdjacentHTML("beforeend", members);
         });
-        det_user_ln_before = det.users.length;
+        state.det_user_ln_before = det.users.length;
       }
       // console.log(det);
     });

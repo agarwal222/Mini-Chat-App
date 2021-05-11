@@ -10,4 +10,8 @@ export const global = {
 
 export const public_rooms = [];
 
+export const state = {
+  det_user_ln_before: 0,
+};
+
 // export default global;

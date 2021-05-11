@@ -2706,7 +2706,7 @@ exports.change_element = change_element;
 Object.defineProperty(exports, "__esModule", {
   value: true
 });
-exports.public_rooms = exports.global = void 0;
+exports.state = exports.public_rooms = exports.global = void 0;
 var global = {
   user_name: "",
   email: "",
@@ -2717,9 +2717,13 @@ var global = {
   }
 };
 exports.global = global;
-var public_rooms = []; // export default global;
-
+var public_rooms = [];
 exports.public_rooms = public_rooms;
+var state = {
+  det_user_ln_before: 0
+}; // export default global;
+
+exports.state = state;
 },{}],"Js/views/publicRoomsList.js":[function(require,module,exports) {
 "use strict";
 
@@ -10251,10 +10255,9 @@ var chat_room_start = function chat_room_start() {
       room_id: _Global.global.room.roomID
     }); //will send username and room details from global
 
-    var det_user_ln_before = 0;
     socket.on("room_details", function (det) {
       // If statement to prevent re-rendering issue
-      if (det_user_ln_before != det.users.length) {
+      if (_Global.state.det_user_ln_before != det.users.length) {
         (0, _change_page.change_element)("center_right", _roomDetails.room_details);
         (0, _change_page.change_element)("room_id", "Room ID : ".concat(det.roomID));
         var contaner = document.getElementById("members");
@@ -10262,7 +10265,7 @@ var chat_room_start = function chat_room_start() {
           var members = "<li>".concat(element, "</li>");
           contaner.insertAdjacentHTML("beforeend", members);
         });
-        det_user_ln_before = det.users.length;
+        _Global.state.det_user_ln_before = det.users.length;
       } // console.log(det);
 
     });
