@@ -14,29 +14,34 @@ export const chat_room_start = () => {
     const msg_input = document.getElementById("chat_msh");
     let msg = msg_input.value;
 
-    // message parser so that no HTML or JS code can be injected in the chat to prevent XSS
-    function escapeRegExp(string) {
-      let p1 = string.replace(/</gi, "&lt");
-      let p2 = p1.replace(/>/gi, "&gt");
-      let p3 = p2.replace(/[.*+?^${}()|[\]\\]/gi, "\\$&");
-      let p4 = p3.replace(/\n/gi, "<br>");
-      let p5 = p4.replace(/(<br>)+$/gi, "");
-      let p6 = p5.replace(/^(<br>)+/gi, "");
-      return p6;
+    if (msg <= 0) {
+      alert("can't be empty");
+      return;
+    } else {
+      // message parser so that no HTML or JS code can be injected in the chat to prevent XSS
+      function escapeRegExp(string) {
+        let p1 = string.replace(/</gi, "&lt");
+        let p2 = p1.replace(/>/gi, "&gt");
+        let p3 = p2.replace(/[.*+?^${}()|[\]\\]/gi, "\\$&");
+        let p4 = p3.replace(/\n/gi, "<br>");
+        let p5 = p4.replace(/(<br>)+$/gi, "");
+        let p6 = p5.replace(/^(<br>)+/gi, "");
+        return p6;
+      }
+
+      let messg = escapeRegExp(msg.toString());
+
+      // Sending msg package to server
+      socket.emit("msg_req", {
+        email: global.email,
+        userName: global.user_name,
+        roomID: global.room.roomID,
+        message: messg,
+      });
+
+      // emptying the input area
+      msg_input.value = "";
     }
-
-    let messg = escapeRegExp(msg.toString());
-
-    // Sending msg package to server
-    socket.emit("msg_req", {
-      email: global.email,
-      userName: global.user_name,
-      roomID: global.room.roomID,
-      message: messg,
-    });
-
-    // emptying the input area
-    msg_input.value = "";
   };
 
   // Receaving msg response
@@ -51,10 +56,10 @@ export const chat_room_start = () => {
       : (classes = "msg_contaner");
 
     const chat_msg = `
-            <div class=${classes}>
-                <h5 class="user_name">${msg.userName}</h5>
-                <div class="msg">${msg.message}</div>
-            </div>`;
+          <div class=${classes}>
+              <h5 class="user_name">${msg.userName}</h5>
+              <div class="msg">${msg.message}</div>
+          </div>`;
 
     // Incering child elements
     contaner.insertAdjacentHTML("beforeend", chat_msg);

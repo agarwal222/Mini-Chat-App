@@ -10194,28 +10194,34 @@ var chat_room_start = function chat_room_start() {
   var msg_request_method = function msg_request_method() {
     // Grabing Value from input field
     var msg_input = document.getElementById("chat_msh");
-    var msg = msg_input.value; // message parser so that no HTML or JS code can be injected in the chat to prevent XSS
+    var msg = msg_input.value;
 
-    function escapeRegExp(string) {
-      var p1 = string.replace(/</gi, "&lt");
-      var p2 = p1.replace(/>/gi, "&gt");
-      var p3 = p2.replace(/[.*+?^${}()|[\]\\]/gi, "\\$&");
-      var p4 = p3.replace(/\n/gi, "<br>");
-      var p5 = p4.replace(/(<br>)+$/gi, "");
-      var p6 = p5.replace(/^(<br>)+/gi, "");
-      return p6;
+    if (msg <= 0) {
+      alert("can't be empty");
+      return;
+    } else {
+      // message parser so that no HTML or JS code can be injected in the chat to prevent XSS
+      function escapeRegExp(string) {
+        var p1 = string.replace(/</gi, "&lt");
+        var p2 = p1.replace(/>/gi, "&gt");
+        var p3 = p2.replace(/[.*+?^${}()|[\]\\]/gi, "\\$&");
+        var p4 = p3.replace(/\n/gi, "<br>");
+        var p5 = p4.replace(/(<br>)+$/gi, "");
+        var p6 = p5.replace(/^(<br>)+/gi, "");
+        return p6;
+      }
+
+      var messg = escapeRegExp(msg.toString()); // Sending msg package to server
+
+      socket.emit("msg_req", {
+        email: _Global.global.email,
+        userName: _Global.global.user_name,
+        roomID: _Global.global.room.roomID,
+        message: messg
+      }); // emptying the input area
+
+      msg_input.value = "";
     }
-
-    var messg = escapeRegExp(msg.toString()); // Sending msg package to server
-
-    socket.emit("msg_req", {
-      email: _Global.global.email,
-      userName: _Global.global.user_name,
-      roomID: _Global.global.room.roomID,
-      message: messg
-    }); // emptying the input area
-
-    msg_input.value = "";
   }; // Receaving msg response
 
 
@@ -10225,7 +10231,7 @@ var chat_room_start = function chat_room_start() {
     var classes = "msg_contaner"; // Cheaking username
 
     msg.email == _Global.global.email ? classes = "\"msg_contaner me\"" : classes = "msg_contaner";
-    var chat_msg = "\n            <div class=".concat(classes, ">\n                <h5 class=\"user_name\">").concat(msg.userName, "</h5>\n                <div class=\"msg\">").concat(msg.message, "</div>\n            </div>"); // Incering child elements
+    var chat_msg = "\n          <div class=".concat(classes, ">\n              <h5 class=\"user_name\">").concat(msg.userName, "</h5>\n              <div class=\"msg\">").concat(msg.message, "</div>\n          </div>"); // Incering child elements
 
     contaner.insertAdjacentHTML("beforeend", chat_msg); // Scrolling to the last msg
 
@@ -10889,7 +10895,7 @@ var parent = module.bundle.parent;
 if ((!parent || !parent.isParcelRequire) && typeof WebSocket !== 'undefined') {
   var hostname = "" || location.hostname;
   var protocol = location.protocol === 'https:' ? 'wss' : 'ws';
-  var ws = new WebSocket(protocol + '://' + hostname + ':' + "50462" + '/');
+  var ws = new WebSocket(protocol + '://' + hostname + ':' + "63508" + '/');
 
   ws.onmessage = function (event) {
     checkedAssets = {};
