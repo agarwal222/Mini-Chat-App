@@ -10251,14 +10251,20 @@ var chat_room_start = function chat_room_start() {
       room_id: _Global.global.room.roomID
     }); //will send username and room details from global
 
+    var det_user_ln_before = 0;
     socket.on("room_details", function (det) {
-      (0, _change_page.change_element)("center_right", _roomDetails.room_details);
-      (0, _change_page.change_element)("room_id", "Room ID : ".concat(det.roomID));
-      var contaner = document.getElementById("members");
-      det.users.forEach(function (element) {
-        var members = "<li>".concat(element, "</li>");
-        contaner.insertAdjacentHTML("beforeend", members);
-      }); // console.log(det);
+      // If statement to prevent re-rendering issue
+      if (det_user_ln_before != det.users.length) {
+        (0, _change_page.change_element)("center_right", _roomDetails.room_details);
+        (0, _change_page.change_element)("room_id", "Room ID : ".concat(det.roomID));
+        var contaner = document.getElementById("members");
+        det.users.forEach(function (element) {
+          var members = "<li>".concat(element, "</li>");
+          contaner.insertAdjacentHTML("beforeend", members);
+        });
+        det_user_ln_before = det.users.length;
+      } // console.log(det);
+
     });
     console.log("its starting"); // just a tesing log
   });

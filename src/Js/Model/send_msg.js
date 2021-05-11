@@ -83,14 +83,19 @@ export const chat_room_start = () => {
       room_id: global.room.roomID,
     }); //will send username and room details from global
 
+    let det_user_ln_before = 0;
     socket.on("room_details", (det) => {
-      change_element("center_right", room_details);
-      change_element("room_id", `Room ID : ${det.roomID}`);
-      const contaner = document.getElementById("members");
-      det.users.forEach((element) => {
-        let members = `<li>${element}</li>`;
-        contaner.insertAdjacentHTML("beforeend", members);
-      });
+      // If statement to prevent re-rendering issue
+      if (det_user_ln_before != det.users.length) {
+        change_element("center_right", room_details);
+        change_element("room_id", `Room ID : ${det.roomID}`);
+        const contaner = document.getElementById("members");
+        det.users.forEach((element) => {
+          let members = `<li>${element}</li>`;
+          contaner.insertAdjacentHTML("beforeend", members);
+        });
+        det_user_ln_before = det.users.length;
+      }
       // console.log(det);
     });
 
