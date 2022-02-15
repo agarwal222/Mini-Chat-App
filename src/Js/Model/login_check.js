@@ -39,6 +39,7 @@ export const check = async () => {
         .catch((err) => {
           change_page("center_left", LoginPage, login_load);
           document.getElementById("err").innerHTML = "User already exist";
+          consol.log(`${global.api_link}/users`);
         });
     } else {
       change_page("center_left", LoginPage, login_load);
