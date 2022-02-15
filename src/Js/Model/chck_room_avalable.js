@@ -6,7 +6,7 @@ import { chat_room_start } from "../Model/send_msg";
 
 export const check_room_avalable = async (iD) => {
   const room_check = await axios
-    .post("http://localhost:3000/checkroom", {
+    .post(`${global.api_link}/checkroom`, {
       roomID: iD,
       email: global.email,
     })

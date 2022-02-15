@@ -11,7 +11,7 @@ export const process_public_room_list = async () => {
 
   // GET request to public rooms api
   const pb_room_list = await axios
-    .get("http://localhost:3000/rooms/public")
+    .get(`${global.api_link}/rooms/public`)
     .catch((err) => console.log(err.data));
 
   if (pb_room_list.data.length !== 0) {

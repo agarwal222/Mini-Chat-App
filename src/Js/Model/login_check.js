@@ -29,7 +29,7 @@ export const check = async () => {
   if (global.user_name && global.email) {
     if (valifateEmail(global.email)) {
       const promis = await axios
-        .post("http://localhost:3000/users", {
+        .post(`${global.api_link}/users`, {
           user_name: global.user_name,
           email: global.email,
         })

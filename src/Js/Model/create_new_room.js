@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const create_new_room = async () => {
   const post_new_room = await axios
-    .post("http://localhost:3000/rooms", {
+    .post(`${global.api_link}/rooms`, {
       userName: global.user_name,
       email: global.email,
       roomName: global.room.roomName,
