@@ -29,7 +29,7 @@ export const check = async () => {
   if (global.user_name && global.email) {
     if (valifateEmail(global.email)) {
       const promis = await axios
-        .post(`${global.api_link}/users`, {
+        .post(`https://invincible-factual-rake.glitch.me/users`, {
           user_name: global.user_name,
           email: global.email,
         })
@@ -39,7 +39,7 @@ export const check = async () => {
         .catch((err) => {
           change_page("center_left", LoginPage, login_load);
           document.getElementById("err").innerHTML = "User already exist";
-          console.log(`${global.api_link}/users`);
+          console.log(`https://invincible-factual-rake.glitch.me}/users`);
         });
     } else {
       change_page("center_left", LoginPage, login_load);

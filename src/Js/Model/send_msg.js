@@ -6,7 +6,7 @@ import { room_details } from "../views/roomDetails";
 // import { ws_con } from "../socket_connect";
 
 export const chat_room_start = () => {
-  const socket = io(`${global.api_link}`);
+  const socket = io(`https://invincible-factual-rake.glitch.me`);
 
   // Method to send msg objct to server
   const msg_request_method = () => {

@@ -3,7 +3,7 @@ import axios from "axios";
 
 export const create_new_room = async () => {
   const post_new_room = await axios
-    .post(`${global.api_link}/rooms`, {
+    .post(`https://invincible-factual-rake.glitch.me}/rooms`, {
       userName: global.user_name,
       email: global.email,
       roomName: global.room.roomName,
