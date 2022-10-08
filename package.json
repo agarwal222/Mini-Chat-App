@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html",
-    "ndmn": "nodemon server/app.js"
+    "ndmn": "nodemon server/app.js",
     "start": "nodemon server/app.js"
   },
   "author": "",
