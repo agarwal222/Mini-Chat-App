@@ -2,6 +2,9 @@
   "name": "mini-project",
   "version": "1.0.0",
   "description": "",
+  "engines": {
+    "node": "14",
+  },
   "scripts": {
     "dev": "parcel src/index.html",
     "build": "parcel build src/index.html",
