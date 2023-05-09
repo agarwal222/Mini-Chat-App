@@ -207,7 +207,7 @@ io.on("connection", (soc) => {
   });
 });
 
-// Server Listning
+// Server Listning..
 server.listen(3000, () => {
   console.log("SERVER STARTED");
 });
